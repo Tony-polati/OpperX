@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDown, ChevronRight, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail } from "lucide-react";
+import { ChevronDown, ChevronRight, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight } from "lucide-react";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,6 +40,30 @@ const Index = () => {
     setIsMenuOpen(false);
   };
 
+  // Animação de entrada para elementos
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.job-card').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      document.querySelectorAll('.job-card').forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
@@ -55,6 +79,7 @@ const Index = () => {
               <button onClick={() => scrollToSection("home")} className="text-gray-700 hover:text-red-600 transition-colors">Home</button>
               <button onClick={() => scrollToSection("sobre")} className="text-gray-700 hover:text-red-600 transition-colors">Sobre</button>
               <button onClick={() => scrollToSection("servicos")} className="text-gray-700 hover:text-red-600 transition-colors">Serviços</button>
+              <button onClick={() => scrollToSection("jobs")} className="text-gray-700 hover:text-red-600 transition-colors">Nossos Jobs</button>
               <button onClick={() => scrollToSection("portfolio")} className="text-gray-700 hover:text-red-600 transition-colors">Portfólio</button>
               <button onClick={() => scrollToSection("depoimentos")} className="text-gray-700 hover:text-red-600 transition-colors">Depoimentos</button>
               <button onClick={() => scrollToSection("contato")} className="text-gray-700 hover:text-red-600 transition-colors">Contato</button>
@@ -78,6 +103,7 @@ const Index = () => {
                 <button onClick={() => scrollToSection("home")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Home</button>
                 <button onClick={() => scrollToSection("sobre")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Sobre</button>
                 <button onClick={() => scrollToSection("servicos")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Serviços</button>
+                <button onClick={() => scrollToSection("jobs")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Nossos Jobs</button>
                 <button onClick={() => scrollToSection("portfolio")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Portfólio</button>
                 <button onClick={() => scrollToSection("depoimentos")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Depoimentos</button>
                 <button onClick={() => scrollToSection("contato")} className="text-gray-700 hover:text-red-600 transition-colors py-2">Contato</button>
@@ -380,8 +406,285 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Nossos Jobs */}
+      <section id="jobs" className="py-16 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nossos Jobs</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Projetos que transformaram negócios e geraram resultados extraordinários
+            </p>
+          </div>
+          
+          {/* Clientes Destacados */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold text-center mb-8">Clientes que confiam na Opperx</h3>
+            <div className="flex flex-wrap justify-center items-center gap-8">
+              <div className="w-32 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-600 font-medium">Cliente A</span>
+              </div>
+              <div className="w-32 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-600 font-medium">Cliente B</span>
+              </div>
+              <div className="w-32 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-600 font-medium">Cliente C</span>
+              </div>
+              <div className="w-32 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-600 font-medium">Cliente D</span>
+              </div>
+              <div className="w-32 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                <span className="text-gray-600 font-medium">Cliente E</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Grid de Jobs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Job 1 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Users className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">Campanha Social</h4>
+                      <p className="text-sm opacity-90">Cliente X</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">+45% leads</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Campanha Social – Cliente X</h3>
+                <p className="text-gray-600 mb-4">
+                  Estratégia completa de conteúdo e engajamento para aumentar a base de leads qualificados.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">+45%</span> de leads em 30 dias
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Job 2 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <TrendingUp className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">Tráfego Pago</h4>
+                      <p className="text-sm opacity-90">Cliente Y</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">320% ROI</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Tráfego Pago – Cliente Y</h3>
+                <p className="text-gray-600 mb-4">
+                  Campanhas otimizadas com segmentação inteligente para maximizar o retorno do investimento.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">320%</span> ROI médio
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Job 3 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Award className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">Branding</h4>
+                      <p className="text-sm opacity-90">Cliente Z</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">+75% reconhecimento</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Branding – Cliente Z</h3>
+                <p className="text-gray-600 mb-4">
+                  Identidade visual completa e estratégia de posicionamento para destacar no mercado.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">+75%</span> reconhecimento de marca
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Job 4 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <MessageCircle className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">Consultoria</h4>
+                      <p className="text-sm opacity-90">Cliente W</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">+200% crescimento</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Consultoria – Cliente W</h3>
+                <p className="text-gray-600 mb-4">
+                  Análise completa e planejamento estratégico para crescimento acelerado e sustentável.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">+200%</span> crescimento em 6 meses
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Job 5 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <TrendingUp className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">E-commerce</h4>
+                      <p className="text-sm opacity-90">Cliente V</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">+85% vendas</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">E-commerce – Cliente V</h3>
+                <p className="text-gray-600 mb-4">
+                  Otimização de conversão e estratégia de tráfego para aumentar as vendas online.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">+85%</span> aumento nas vendas
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Job 6 */}
+            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
+              <CardHeader className="p-0">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <div className="w-full h-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Users className="text-white" size={32} />
+                      </div>
+                      <h4 className="text-xl font-bold">Redes Sociais</h4>
+                      <p className="text-sm opacity-90">Cliente U</p>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-green-500 text-white">+120% engajamento</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Redes Sociais – Cliente U</h3>
+                <p className="text-gray-600 mb-4">
+                  Gestão completa de comunidade e conteúdo para engajar e converter seguidores.
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500">
+                    <span className="font-semibold">+120%</span> engajamento médio
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-red-600 text-red-600 hover:bg-red-50"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Botão Ver Mais Jobs */}
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold flex items-center mx-auto"
+              onClick={() => scrollToSection("portfolio")}
+            >
+              Ver mais jobs
+              <ArrowRight className="ml-2" size={20} />
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Portfólio */}
-      <section id="portfolio" className="py-16 px-4 bg-gray-50">
+      <section id="portfolio" className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Nosso Portfólio</h2>
@@ -482,7 +785,7 @@ const Index = () => {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="py-16 px-4">
+      <section id="depoimentos" className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">O Que Nossos Clientes Dizem</h2>
@@ -759,6 +1062,7 @@ const Index = () => {
               <h4 className="font-semibold mb-4">Empresa</h4>
               <ul className="space-y-2 text-gray-400">
                 <li><button onClick={() => scrollToSection("sobre")} className="hover:text-white transition-colors">Sobre Nós</button></li>
+                <li><button onClick={() => scrollToSection("jobs")} className="hover:text-white transition-colors">Nossos Jobs</button></li>
                 <li><button onClick={() => scrollToSection("portfolio")} className="hover:text-white transition-colors">Portfólio</button></li>
                 <li><button onClick={() => scrollToSection("depoimentos")} className="hover:text-white transition-colors">Depoimentos</button></li>
                 <li><button onClick={() => scrollToSection("contato")} className="hover:text-white transition-colors">Contato</button></li>
