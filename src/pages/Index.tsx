@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDown, ChevronRight, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronRight, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,29 +40,95 @@ const Index = () => {
     setIsMenuOpen(false);
   };
 
-  // Animação de entrada para elementos
+  // Carrossel Jobs
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const jobs = [
+    {
+      id: 1,
+      title: "Campanha Social – Cliente X",
+      description: "Aumento de engajamento em 40%",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-red-400 to-red-600"
+    },
+    {
+      id: 2,
+      title: "Tráfego Pago – Cliente Y",
+      description: "ROI de 320% em 3 meses",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-blue-400 to-blue-600"
+    },
+    {
+      id: 3,
+      title: "Branding – Cliente Z",
+      description: "Reconhecimento de marca +75%",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-purple-400 to-purple-600"
+    },
+    {
+      id: 4,
+      title: "Consultoria – Cliente W",
+      description: "Crescimento de 200% em 6 meses",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-green-400 to-green-600"
+    },
+    {
+      id: 5,
+      title: "E-commerce – Cliente V",
+      description: "Vendas aumentadas em 85%",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-orange-400 to-orange-600"
+    },
+    {
+      id: 6,
+      title: "Redes Sociais – Cliente U",
+      description: "Engajamento +120% mensal",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      gradient: "from-pink-400 to-pink-600"
+    }
+  ];
+
+  const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => (prev === jobs.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => (prev === 0 ? jobs.length - 1 : prev - 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const goToSlide = (index: number) => {
+    if (isTransitioning || index === currentSlide) return;
+    setIsTransitioning(true);
+    setCurrentSlide(index);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.job-card').forEach((el) => {
-      observer.observe(el);
-    });
-
+    intervalRef.current = setInterval(nextSlide, 3500);
     return () => {
-      document.querySelectorAll('.job-card').forEach((el) => {
-        observer.unobserve(el);
-      });
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
+
+  const handleMouseEnter = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    intervalRef.current = setInterval(nextSlide, 3500);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -406,7 +472,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Nossos Jobs */}
+      {/* Nossos Jobs - Carrossel */}
       <section id="jobs" className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -438,239 +504,103 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Grid de Jobs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* Job 1 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Users className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">Campanha Social</h4>
-                      <p className="text-sm opacity-90">Cliente X</p>
-                    </div>
+          {/* Carrossel de Jobs */}
+          <div className="relative max-w-6xl mx-auto">
+            <div 
+              className="overflow-hidden rounded-lg"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {jobs.map((job) => (
+                  <div key={job.id} className="w-full flex-shrink-0">
+                    <Card className="h-full">
+                      <CardHeader className="p-0">
+                        <div className="relative h-64 overflow-hidden rounded-t-lg">
+                          <img 
+                            src={job.image} 
+                            alt={job.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                          <div className="absolute bottom-4 left-4 text-white">
+                            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                              <div className={`w-8 h-8 bg-gradient-to-br ${job.gradient} rounded-full flex items-center justify-center`}>
+                                <span className="text-white text-xs font-bold">{job.id}</span>
+                              </div>
+                            </div>
+                            <h4 className="text-xl font-bold">{job.title.split(' – ')[0]}</h4>
+                            <p className="text-sm opacity-90">{job.title.split(' – ')[1]}</p>
+                          </div>
+                          <div className="absolute top-4 right-4">
+                            <Badge className="bg-green-500 text-white">
+                              {job.description}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-6">
+                        <h3 className="text-lg font-semibold mb-2">{job.title}</h3>
+                        <p className="text-gray-600 mb-4">
+                          Estratégia completa implementada para gerar resultados extraordinários e crescimento sustentável.
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="text-sm text-gray-500">
+                            <span className="font-semibold">{job.description}</span>
+                          </div>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            className="border-red-600 text-red-600 hover:bg-red-50"
+                          >
+                            Ver detalhes
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">+45% leads</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Campanha Social – Cliente X</h3>
-                <p className="text-gray-600 mb-4">
-                  Estratégia completa de conteúdo e engajamento para aumentar a base de leads qualificados.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">+45%</span> de leads em 30 dias
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                ))}
+              </div>
+            </div>
 
-            {/* Job 2 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <TrendingUp className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">Tráfego Pago</h4>
-                      <p className="text-sm opacity-90">Cliente Y</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">320% ROI</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Tráfego Pago – Cliente Y</h3>
-                <p className="text-gray-600 mb-4">
-                  Campanhas otimizadas com segmentação inteligente para maximizar o retorno do investimento.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">320%</span> ROI médio
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Setas de Navegação */}
+            <button 
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+              aria-label="Slide anterior"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+              aria-label="Próximo slide"
+            >
+              <ChevronRightIcon size={24} />
+            </button>
 
-            {/* Job 3 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Award className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">Branding</h4>
-                      <p className="text-sm opacity-90">Cliente Z</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">+75% reconhecimento</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Branding – Cliente Z</h3>
-                <p className="text-gray-600 mb-4">
-                  Identidade visual completa e estratégia de posicionamento para destacar no mercado.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">+75%</span> reconhecimento de marca
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Job 4 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <MessageCircle className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">Consultoria</h4>
-                      <p className="text-sm opacity-90">Cliente W</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">+200% crescimento</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Consultoria – Cliente W</h3>
-                <p className="text-gray-600 mb-4">
-                  Análise completa e planejamento estratégico para crescimento acelerado e sustentável.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">+200%</span> crescimento em 6 meses
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Job 5 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <TrendingUp className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">E-commerce</h4>
-                      <p className="text-sm opacity-90">Cliente V</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">+85% vendas</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">E-commerce – Cliente V</h3>
-                <p className="text-gray-600 mb-4">
-                  Otimização de conversão e estratégia de tráfego para aumentar as vendas online.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">+85%</span> aumento nas vendas
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Job 6 */}
-            <Card className="job-card opacity-0 transition-all duration-700 hover:shadow-xl hover:-translate-y-2">
-              <CardHeader className="p-0">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <div className="w-full h-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Users className="text-white" size={32} />
-                      </div>
-                      <h4 className="text-xl font-bold">Redes Sociais</h4>
-                      <p className="text-sm opacity-90">Cliente U</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">+120% engajamento</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Redes Sociais – Cliente U</h3>
-                <p className="text-gray-600 mb-4">
-                  Gestão completa de comunidade e conteúdo para engajar e converter seguidores.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-500">
-                    <span className="font-semibold">+120%</span> engajamento médio
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-red-600 text-red-600 hover:bg-red-50"
-                  >
-                    Ver detalhes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Indicadores (Bullets) */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {jobs.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentSlide 
+                      ? 'bg-red-600 scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Ir para slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Botão Ver Mais Jobs */}
-          <div className="text-center">
+          <div className="text-center mt-12">
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold flex items-center mx-auto"
