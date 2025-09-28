@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ChevronDown, ChevronRight, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
+import { useSettings } from "@/hooks/useSettings";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ const Index = () => {
     whatsapp: "",
     message: ""
   });
+  const { settings, loading } = useSettings();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +71,7 @@ const Index = () => {
     },
     {
       id: 4,
-      title: "Consultoria – Cliente W",
+      title: "Tráfego Pago – Cliente W",
       description: "Crescimento de 200% em 6 meses",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
       gradient: "from-green-400 to-green-600"
@@ -128,6 +130,16 @@ const Index = () => {
 
   const handleMouseLeave = () => {
     intervalRef.current = setInterval(nextSlide, 3500);
+  };
+
+  // Format phone number for display
+  const formatPhoneNumber = (phone: string) => {
+    // Remove all non-digit characters
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length === 13) { // +55 + 2 DDD + 9 digits
+      return `+55 ${cleaned.substring(2, 4)} ${cleaned.substring(4, 8)}-${cleaned.substring(8, 12)}`;
+    }
+    return phone;
   };
 
   return (
@@ -898,7 +910,16 @@ const Index = () => {
                     <Phone className="text-red-600 mr-3" size={20} />
                     <div>
                       <p className="font-semibold">Telefone</p>
-                      <p className="text-gray-600">(11) 99999-9999</p>
+                      <p className="text-gray-600">
+                        {loading ? 'Carregando...' : (
+                          <a 
+                            href={`tel:${settings?.contact_phone}`}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
+                          </a>
+                        )}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -912,7 +933,18 @@ const Index = () => {
                     <Instagram className="text-red-600 mr-3" size={20} />
                     <div>
                       <p className="font-semibold">Instagram</p>
-                      <p className="text-gray-600">@opperx_marketing</p>
+                      <p className="text-gray-600">
+                        {loading ? 'Carregando...' : (
+                          <a 
+                            href={settings?.instagram_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            {settings?.instagram || '@opper.ofc'}
+                          </a>
+                        )}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -926,7 +958,7 @@ const Index = () => {
                 <CardContent className="space-y-4">
                   <Button 
                     className="w-full bg-green-600 hover:bg-green-700 text-white"
-                    onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
+                    onClick={() => window.open(`https://wa.me/${settings?.contact_phone?.replace(/\D/g, '')}`, '_blank')}
                   >
                     <Phone className="mr-2" size={20} />
                     WhatsApp Direto
@@ -934,7 +966,7 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     className="w-full border-red-600 text-red-600 hover:bg-red-50"
-                    onClick={() => window.open('https://instagram.com/opperx_marketing', '_blank')}
+                    onClick={() => window.open(settings?.instagram_url || 'https://instagram.com/opper.ofc', '_blank')}
                   >
                     <Instagram className="mr-2" size={20} />
                     Instagram
@@ -1001,9 +1033,29 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Contato</h4>
               <ul className="space-y-2 text-gray-400">
+                <li>
+                  {loading ? 'Carregando...' : (
+                    <a 
+                      href={`tel:${settings?.contact_phone}`}
+                      className="hover:text-white transition-colors"
+                    >
+                      {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
+                    </a>
+                  )}
+                </li>
                 <li>contato@opperx.com.br</li>
-                <li>(11) 99999-9999</li>
-                <li>@opperx_marketing</li>
+                <li>
+                  {loading ? 'Carregando...' : (
+                    <a 
+                      href={settings?.instagram_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors"
+                    >
+                      {settings?.instagram || '@opper.ofc'}
+                    </a>
+                  )}
+                </li>
               </ul>
             </div>
           </div>
