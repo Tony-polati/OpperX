@@ -42,12 +42,6 @@ const Index = () => {
     setIsMenuOpen(false);
   };
 
-  const jobs = [
-    { id: 1, title: "Campanha Social – Cliente X", description: "Aumento de engajamento em 40%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
-    { id: 2, title: "Tráfego Pago – Cliente Y", description: "ROI de 320% em 3 meses", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
-    { id: 3, title: "Branding – Cliente Z", description: "Reconhecimento de marca +75%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
-  ];
-
   const carouselItems = [
     { id: 1, title: "Campanha Social", description: "Aumento de engajamento em 40%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
     { id: 2, title: "Tráfego Pago", description: "ROI de 320% em 3 meses", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
@@ -127,10 +121,10 @@ const Index = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <section id="portfolio" className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Nosso Portfólio em Destaque</h2>
+            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
             <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
               Explore nossos trabalhos mais impactantes e resultados reais.
             </p>
@@ -184,37 +178,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Portfólio */}
-      <section id="portfolio" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Resultados reais que falam por si.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {jobs.map(job => (
-              <Card key={job.id} className="overflow-hidden group">
-                <div className="relative">
-                  <img src={job.image} alt={job.title} loading="lazy" className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <Badge className="absolute top-4 right-4 bg-secondary-yellow text-text-main">{job.description}</Badge>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{job.title}</h3>
-                  <Button variant="link" className="p-0 text-primary-red">Ver detalhes <ArrowRight className="ml-2" size={16} /></Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Depoimentos */}
-      <section id="depoimentos" className="py-20 bg-white">
+      <section id="depoimentos" className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">O Que Nossos Clientes Dizem</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Histórias de sucesso que nos inspiram a ir além.</p>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
+              Histórias de sucesso que nos inspiram a ir além.
+            </p>
           </div>
           <div className="grid lg:grid-cols-3 gap-8">
             {[
