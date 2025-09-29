@@ -120,19 +120,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Carousel Section */}
-      <section id="portfolio" className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
-              Explore nossos trabalhos mais impactantes e resultados reais.
-            </p>
-          </div>
-          <ImageCarousel items={carouselItems} />
-        </div>
-      </section>
-
       {/* Sobre / Credenciais */}
       <section id="sobre" className="py-20">
         <div className="container mx-auto px-6">
@@ -175,6 +162,19 @@ const Index = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section id="portfolio" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
+              Explore nossos trabalhos mais impactantes e resultados reais.
+            </p>
+          </div>
+          <ImageCarousel items={carouselItems} />
         </div>
       </section>
 
