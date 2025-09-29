@@ -61,36 +61,39 @@ const Index = () => {
     <div className="min-h-screen bg-background-light font-inter">
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center h-20">
-            <img src="/logo.png" alt="OpperX Logo" className="h-20" />
-            <div className="hidden md:flex space-x-8">
-              {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
-                <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
-                  {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
-                </button>
-              ))}
-            </div>
-            <div className="md:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main">
-                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        <div className="container mx-auto px-8 py-6 h-32 flex justify-between items-center">
+          <img 
+            src="/logo.png" 
+            alt="OpperX Logo" 
+            className="h-16 md:h-28 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
+            onClick={() => scrollToSection("home")}
+          />
+          <div className="hidden md:flex space-x-8 items-center">
+            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
+                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
               </button>
-            </div>
+            ))}
           </div>
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-200 flex flex-col items-center space-y-4">
-              {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
-                <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium py-2">
-                  {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main">
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200 flex flex-col items-center space-y-4">
+            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium py-2">
+                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 bg-white">
+      <section id="home" className="pt-40 pb-20 bg-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl leading-tight font-poppins">
             Transformamos marcas em <span className="text-primary-red">experiências memoráveis</span>
@@ -240,9 +243,9 @@ const Index = () => {
       <footer className="bg-text-main text-white py-12">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <img src="/logo.png" alt="OpperX Logo" className="h-16 mb-4" />
-              <p className="text-gray-400">Agência de marketing digital focada em resultados.</p>
+            <div className="flex flex-col items-center md:items-start">
+              <img src="/logo.png" alt="OpperX Logo" className="h-14 md:h-20 w-auto mb-4" />
+              <p className="text-gray-400 text-center md:text-left">Agência de marketing digital focada em resultados.</p>
             </div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
