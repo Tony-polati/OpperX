@@ -65,7 +65,7 @@ const Index = () => {
           <img 
             src="/logo.png" 
             alt="OpperX Logo" 
-            className="h-16 md:h-28 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
+            className="h-20 md:h-32 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
             onClick={() => scrollToSection("home")}
           />
           <div className="hidden md:flex space-x-8 items-center">
@@ -244,7 +244,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="flex flex-col items-center md:items-start">
-              <img src="/logo.png" alt="OpperX Logo" className="h-14 md:h-20 w-auto mb-4" />
+              <img src="/logo.png" alt="OpperX Logo" className="h-16 md:h-24 w-auto mb-4" />
               <p className="text-gray-400 text-center md:text-left">Agência de marketing digital focada em resultados.</p>
             </div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
