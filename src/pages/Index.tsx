@@ -249,19 +249,22 @@ const Index = () => {
       <section id="sobre" className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Sobre a Opperx</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Sobre a OpperX</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Somos uma agência de marketing digital dedicada a transformar marcas em experiências memoráveis
+              A OpperX nasceu com a missão de transformar ideias em resultados reais.
             </p>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Nossa História</h3>
+              <p className="text-gray-600 mb-4">
+                A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.
+              </p>
+              <p className="text-gray-600 mb-4">
+                Nosso diferencial está no “X”: o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.
+              </p>
               <p className="text-gray-600 mb-6">
-                Fundada em 2014, a Opperx nasceu da visão de criar estratégias de marketing que realmente geram resultados. 
-                Ao longo dos anos, evoluímos para nos tornarmos referência no mercado digital, ajudando centenas de empresas 
-                a alcançarem seus objetivos de crescimento.
+                Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀
               </p>
               
               <div className="space-y-4">
@@ -269,21 +272,21 @@ const Index = () => {
                   <CheckCircle className="text-red-600 mt-1 mr-3" />
                   <div>
                     <h4 className="font-semibold">Missão</h4>
-                    <p className="text-gray-600">Transformar negócios através de estratégias digitais inovadoras e resultados mensuráveis</p>
+                    <p className="text-gray-600">Transformar ideias em resultados reais, construindo marcas fortes e conexões autênticas.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-red-600 mt-1 mr-3" />
                   <div>
                     <h4 className="font-semibold">Visão</h4>
-                    <p className="text-gray-600">Ser a agência de referência em marketing digital para empresas que buscam crescimento sustentável</p>
+                    <p className="text-gray-600">Ser a agência de referência em marketing digital para empresas que buscam crescimento sustentável.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-red-600 mt-1 mr-3" />
                   <div>
                     <h4 className="font-semibold">Valores</h4>
-                    <p className="text-gray-600">Integridade, Inovação, Resultados e Parceria</p>
+                    <p className="text-gray-600">Criatividade, Estratégia, Performance e Parceria.</p>
                   </div>
                 </div>
               </div>
