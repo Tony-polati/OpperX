@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight, ChevronLeft, ChevronRight as ChevronRightIcon, Clock, ShieldCheck } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
+import ImageCarousel from "@/components/ImageCarousel";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,6 +46,14 @@ const Index = () => {
     { id: 1, title: "Campanha Social – Cliente X", description: "Aumento de engajamento em 40%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
     { id: 2, title: "Tráfego Pago – Cliente Y", description: "ROI de 320% em 3 meses", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
     { id: 3, title: "Branding – Cliente Z", description: "Reconhecimento de marca +75%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
+  ];
+
+  const carouselItems = [
+    { id: 1, title: "Campanha Social", description: "Aumento de engajamento em 40%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 2, title: "Tráfego Pago", description: "ROI de 320% em 3 meses", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 3, title: "Branding", description: "Reconhecimento de marca +75%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 4, title: "Marketing Digital", description: "Resultados mensuráveis", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 5, title: "Design Criativo", description: "Identidade visual única", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
   ];
 
   const formatPhoneNumber = (phone: string) => {
@@ -114,6 +123,274 @@ const Index = () => {
             <div className="flex items-center gap-2"><Users size={16} /> +500 Clientes Atendidos</div>
             <div className="flex items-center gap-2"><ShieldCheck size={16} /> 95% de Satisfação</div>
           </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Nosso Portfólio em Destaque</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
+              Explore nossos trabalhos mais impactantes e resultados reais.
+            </p>
+          </div>
+          <ImageCarousel items={carouselItems} />
+        </div>
+      </section>
+
+      {/* Sobre / Credenciais */}
+      <section id="sobre" className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-4xl font-poppins mb-6">O fator "X" da OpperX</h2>
+              <p className="text-text-muted mb-4">A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.</p>
+              <p className="text-text-muted mb-4">Nosso diferencial está no "X": o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
+              <p className="text-text-muted">Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀</p>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-6">
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">10+</p><p className="text-text-muted">Anos de Experiência</p></CardContent></Card>
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">500+</p><p className="text-text-muted">Clientes Atendidos</p></CardContent></Card>
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">95%</p><p className="text-text-muted">de Satisfação</p></CardContent></Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Serviços */}
+      <section id="servicos" className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Nossos Serviços</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Estratégias personalizadas para impulsionar seu negócio.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Users, title: "Gestão de Redes Sociais", bullets: ["+60% de engajamento", "Conteúdo estratégico", "Análise de métricas"] },
+              { icon: TrendingUp, title: "Tráfego Pago", bullets: ["ROI médio de 300%+", "Campanhas otimizadas", "Segmentação inteligente"] },
+              { icon: Award, title: "Branding e Design", bullets: ["Identidade visual única", "Design responsivo", "Experiência do usuário"] },
+              { icon: MessageCircle, title: "Consultoria Estratégica", bullets: ["Análise completa", "Planejamento detalhado", "Crescimento escalável"] }
+            ].map(service => (
+              <Card key={service.title} className="text-center hover:shadow-xl transition-shadow">
+                <CardHeader><div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4"><service.icon className="text-primary-red" size={32} /></div><CardTitle>{service.title}</CardTitle></CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-text-muted mb-6">{service.bullets.map(bullet => <li key={bullet} className="flex items-center justify-center gap-2"><CheckCircle className="text-primary-red" size={16} />{bullet}</li>)}</ul>
+                  <Button onClick={() => scrollToSection("contato")} className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl">Solicitar Serviço</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfólio */}
+      <section id="portfolio" className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Resultados reais que falam por si.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {jobs.map(job => (
+              <Card key={job.id} className="overflow-hidden group">
+                <div className="relative">
+                  <img src={job.image} alt={job.title} loading="lazy" className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <Badge className="absolute top-4 right-4 bg-secondary-yellow text-text-main">{job.description}</Badge>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{job.title}</h3>
+                  <Button variant="link" className="p-0 text-primary-red">Ver detalhes <ArrowRight className="ml-2" size={16} /></Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Depoimentos */}
+      <section id="depoimentos" className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">O Que Nossos Clientes Dizem</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Histórias de sucesso que nos inspiram a ir além.</p>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-8">
+            {[
+              { name: "Ana Silva", company: "CEO - E-commerce Fashion", quote: "A Opperx transformou nossa presença digital. O resultado foi um aumento de 85% nas vendas online. Competência e resultados acima do esperado!" },
+              { name: "Carlos Mendes", company: "Fundador - Tech Startup", quote: "A consultoria foi fundamental para nosso crescimento. Triplicamos os leads qualificados em 6 meses. Recomendo fortemente!" },
+              { name: "Maria Oliveira", company: "Proprietária - Restaurante", quote: "O trabalho de branding elevou nosso restaurante a outro patamar. A nova identidade visual refletiu em mais reservas e fidelização." }
+            ].map(depoimento => (
+              <Card key={depoimento.name} className="shadow-sm"><CardContent className="p-6"><p className="text-text-muted mb-4 italic">"{depoimento.quote}"</p><div className="flex items-center"><div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div><div><h4 className="font-bold">{depoimento.name}</h4><p className="text-sm text-text-muted">{depoimento.company}</p></div></div></CardContent></Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contato */}
+      <section id="contato" className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Entre em contato e receba uma proposta exclusiva em até 24h.</p>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <Card className="shadow-lg">
+              <CardHeader><CardTitle>Solicite um Orçamento</CardTitle><CardDescription>Preencha o formulário e nossa equipe entrará em contato.</CardDescription></CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div><Label htmlFor="name">Nome Completo</Label><Input id="name" name="name" value={formData.name} onChange={handleInputChange} required /></div>
+                  <div><Label htmlFor="email">E-mail</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} required /></div>
+                  <div><Label htmlFor="whatsapp">WhatsApp</Label><Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required placeholder="(13) 98103 8883" /></div>
+                  <div><Label htmlFor="message">Mensagem</Label><Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Conte-nos sobre seus objetivos..." /></div>
+                  <Button type="submit" className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl text-lg py-3">Enviar Mensagem</Button>
+                </form>
+              </CardContent>
+            </Card>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-poppins">Informações de Contato</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4"><Phone className="text-primary-red" size={24} /><div><p className="font-bold">Telefone</p><a href={`tel:${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted hover
+<dyad-write path="src/pages/Index.tsx" description="Adding the ImageCarousel component to the Index page">
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { MadeWithDyad } from "@/components/made-with-dyad";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight, ChevronLeft, ChevronRight as ChevronRightIcon, Clock, ShieldCheck } from "lucide-react";
+import { useSettings } from "@/hooks/useSettings";
+import ImageCarousel from "@/components/ImageCarousel";
+
+const Index = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    whatsapp: "",
+    message: ""
+  });
+  const { settings, loading } = useSettings();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Obrigado! Entraremos em contato em até 24h.");
+    setFormData({ name: "", email: "", whatsapp: "", message: "" });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const jobs = [
+    { id: 1, title: "Campanha Social – Cliente X", description: "Aumento de engajamento em 40%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
+    { id: 2, title: "Tráfego Pago – Cliente Y", description: "ROI de 320% em 3 meses", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
+    { id: 3, title: "Branding – Cliente Z", description: "Reconhecimento de marca +75%", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
+  ];
+
+  const carouselItems = [
+    { id: 1, title: "Campanha Social", description: "Aumento de engajamento em 40%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 2, title: "Tráfego Pago", description: "ROI de 320% em 3 meses", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 3, title: "Branding", description: "Reconhecimento de marca +75%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 4, title: "Marketing Digital", description: "Resultados mensuráveis", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    { id: 5, title: "Design Criativo", description: "Identidade visual única", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+  ];
+
+  const formatPhoneNumber = (phone: string) => {
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length === 13) {
+      return `(${cleaned.substring(2, 4)}) ${cleaned.substring(4, 9)} ${cleaned.substring(9)}`;
+    }
+    return phone;
+  };
+
+  const whatsappUrl = `https://wa.me/5513981038883?text=${encodeURIComponent("Olá, quero solicitar um orçamento.")}`;
+
+  return (
+    <div className="min-h-screen bg-background-light font-inter">
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50">
+        <div className="container mx-auto px-8 py-6 h-32 flex justify-between items-center">
+          <img 
+            src="/logo.png" 
+            alt="OpperX Logo" 
+            className="h-20 md:h-32 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
+            onClick={() => scrollToSection("home")}
+          />
+          <div className="hidden md:flex space-x-8 items-center">
+            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
+                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
+              </button>
+            ))}
+          </div>
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main">
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200 flex flex-col items-center space-y-4">
+            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium py-2">
+                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
+              </button>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="pt-40 pb-20 bg-white">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-6xl leading-tight font-poppins">
+            Transformamos marcas em <span className="text-primary-red">experiências memoráveis</span>
+          </h1>
+          <p className="mt-4 text-lg text-text-muted max-w-3xl mx-auto">
+            Estratégias de marketing digital que geram leads qualificados e crescimento mensurável.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-xl bg-primary-red text-white font-medium shadow-lg hover:bg-primary-red-dark focus:outline-none focus:ring-2 focus:ring-primary-red focus:ring-offset-2 transition-all">
+              Peça um orçamento
+            </a>
+            <button onClick={() => scrollToSection("servicos")} className="px-8 py-4 rounded-xl border-2 border-primary-red text-primary-red font-medium hover:bg-secondary-yellow hover:text-text-main hover:border-secondary-yellow transition-all">
+              Conheça nossos serviços
+            </button>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 justify-center text-text-muted">
+            <div className="flex items-center gap-2"><Clock size={16} /> Resposta em até 24h</div>
+            <div className="flex items-center gap-2"><Users size={16} /> +500 Clientes Atendidos</div>
+            <div className="flex items-center gap-2"><ShieldCheck size={16} /> 95% de Satisfação</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-poppins">Nosso Portfólio em Destaque</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
+              Explore nossos trabalhos mais impactantes e resultados reais.
+            </p>
+          </div>
+          <ImageCarousel items={carouselItems} />
         </div>
       </section>
 

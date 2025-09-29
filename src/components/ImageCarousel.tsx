@@ -1,0 +1,81 @@
+"use client";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+interface CarouselItem {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+interface ImageCarouselProps {
+  items: CarouselItem[];
+}
+
+const ImageCarousel = ({ items }: ImageCarouselProps) => {
+  return (
+    <div className="w-full max-w-6xl mx-auto py-12">
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
+        modules={[Navigation, Pagination]}
+        className="swiper-coverflow"
+      >
+        {items.map((item) => (
+          <SwiperSlide key={item.id} className="swiper-slide-coverflow">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className="w-full h-80 md:h-96 object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/90 text-lg">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+        
+        {/* Custom Navigation Buttons */}
+        <div className="swiper-button-next custom-nav-btn">
+          <ChevronRight className="w-8 h-8 text-white" />
+        </div>
+        <div className="swiper-button-prev custom-nav-btn">
+          <ChevronLeft className="w-8 h-8 text-white" />
+        </div>
+      </Swiper>
+    </div>
+  );
+};
+
+export default ImageCarousel;
