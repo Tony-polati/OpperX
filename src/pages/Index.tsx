@@ -916,7 +916,7 @@ const Index = () => {
                             href={`tel:${settings?.contact_phone}`}
                             className="text-blue-600 hover:text-blue-800"
                           >
-                            {formatPhoneNumber(settings?.contact_phone || '+55139818883')}
+                            {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
                           </a>
                         )}
                       </p>
@@ -1039,7 +1039,7 @@ const Index = () => {
                       href={`tel:${settings?.contact_phone}`}
                       className="hover:text-white transition-colors"
                     >
-                      {formatPhoneNumber(settings?.contact_phone || '+55139818883')}
+                      {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
                     </a>
                   )}
                 </li>
