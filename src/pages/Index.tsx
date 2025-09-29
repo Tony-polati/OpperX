@@ -63,7 +63,7 @@ const Index = () => {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-20">
-            <h1 className="text-3xl font-bold text-primary-red font-poppins">OPPERX</h1>
+            <img src="/logo.png" alt="OpperX Logo" className="h-10" />
             <div className="hidden md:flex space-x-8">
               {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
                 <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
@@ -240,7 +240,10 @@ const Index = () => {
       <footer className="bg-text-main text-white py-12">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div><h3 className="text-2xl font-bold text-primary-red mb-4 font-poppins">OPPERX</h3><p className="text-gray-400">Agência de marketing digital focada em resultados.</p></div>
+            <div>
+              <img src="/logo.png" alt="OpperX Logo" className="h-8 mb-4" />
+              <p className="text-gray-400">Agência de marketing digital focada em resultados.</p>
+            </div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumber(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
