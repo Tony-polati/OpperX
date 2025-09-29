@@ -136,7 +136,7 @@ const Index = () => {
   const formatPhoneNumber = (phone: string) => {
     // Remove all non-digit characters
     const cleaned = phone.replace(/\D/g, '');
-    if (cleaned.length === 11) { // +55 + 2 DDD + 9 digits
+    if (cleaned.length === 13) { // +55 + 2 DDD + 9 digits
       return `+55 ${cleaned.substring(2, 4)} ${cleaned.substring(4, 8)}-${cleaned.substring(8, 12)}`;
     }
     return phone;
@@ -916,7 +916,7 @@ const Index = () => {
                             href={`tel:${settings?.contact_phone}`}
                             className="text-blue-600 hover:text-blue-800"
                           >
-                            {formatPhoneNumber(settings?.contact_phone || '+55139818883')}
+                            {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
                           </a>
                         )}
                       </p>
@@ -941,7 +941,7 @@ const Index = () => {
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:text-blue-800"
                           >
-                            {settings?.instagram || '@opperx.ofc'}
+                            {settings?.instagram || '@opper.ofc'}
                           </a>
                         )}
                       </p>
@@ -966,7 +966,7 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     className="w-full border-red-600 text-red-600 hover:bg-red-50"
-                    onClick={() => window.open(settings?.instagram_url || 'https://instagram.com/opperx.ofc', '_blank')}
+                    onClick={() => window.open(settings?.instagram_url || 'https://instagram.com/opper.ofc', '_blank')}
                   >
                     <Instagram className="mr-2" size={20} />
                     Instagram
@@ -1039,7 +1039,7 @@ const Index = () => {
                       href={`tel:${settings?.contact_phone}`}
                       className="hover:text-white transition-colors"
                     >
-                      {formatPhoneNumber(settings?.contact_phone || '+55139818883')}
+                      {formatPhoneNumber(settings?.contact_phone || '+5513981038883')}
                     </a>
                   )}
                 </li>
@@ -1052,7 +1052,7 @@ const Index = () => {
                       rel="noopener noreferrer"
                       className="hover:text-white transition-colors"
                     >
-                      {settings?.instagram || '@opperx.ofc'}
+                      {settings?.instagram || '@opper.ofc'}
                     </a>
                   )}
                 </li>
