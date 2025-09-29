@@ -240,8 +240,8 @@ const Index = () => {
               <img src="/logo.png" alt="OpperX Logo" className="h-16 md:h-24 w-auto mb-4" />
               <p className="text-gray-400 text-center md:text-left">Agência de marketing digital focada em resultados.</p>
             </div>
-            <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
-            <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
+            <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s} className="hover:text-white">{s}</li>)}</ul></div>
+            <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s} className="hover:text-white">{s}</li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumber(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
           </div>
           <Separator className="bg-gray-700 my-8" />
