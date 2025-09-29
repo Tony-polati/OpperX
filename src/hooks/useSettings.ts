@@ -29,16 +29,16 @@ export const useSettings = () => {
 
         setSettings({
           contact_phone: settingsMap.contact_phone || '+5513981038883',
-          instagram: settingsMap.instagram || '@opper.ofc',
-          instagram_url: settingsMap.instagram_url || 'https://instagram.com/opper.ofc'
+          instagram: settingsMap.instagram || '@opperx.ofc',
+          instagram_url: settingsMap.instagram_url || 'https://instagram.com/opperx.ofc'
         });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch settings');
         // Fallback to default values
         setSettings({
           contact_phone: '+5513981038883',
-          instagram: '@opper.ofc',
-          instagram_url: 'https://instagram.com/opper.ofc'
+          instagram: '@opperx.ofc',
+          instagram_url: 'https://instagram.com/opperx.ofc'
         });
       } finally {
         setLoading(false);

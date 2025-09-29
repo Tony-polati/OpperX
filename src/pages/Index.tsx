@@ -50,12 +50,12 @@ const Index = () => {
   const formatPhoneNumber = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 13) {
-      return `+55 ${cleaned.substring(2, 4)} ${cleaned.substring(4, 9)}-${cleaned.substring(9)}`;
+      return `(${cleaned.substring(2, 4)}) ${cleaned.substring(4, 9)} ${cleaned.substring(9)}`;
     }
     return phone;
   };
 
-  const whatsappUrl = `https://wa.me/${settings?.contact_phone?.replace(/\D/g, '') || '5513981038883'}?text=${encodeURIComponent("Olá! Gostaria de solicitar um orçamento.")}`;
+  const whatsappUrl = `https://wa.me/5513981038883?text=${encodeURIComponent("Olá, quero solicitar um orçamento.")}`;
 
   return (
     <div className="min-h-screen bg-background-light font-inter">
@@ -217,7 +217,7 @@ const Index = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div><Label htmlFor="name">Nome Completo</Label><Input id="name" name="name" value={formData.name} onChange={handleInputChange} required /></div>
                   <div><Label htmlFor="email">E-mail</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} required /></div>
-                  <div><Label htmlFor="whatsapp">WhatsApp</Label><Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required placeholder="(11) 99999-9999" /></div>
+                  <div><Label htmlFor="whatsapp">WhatsApp</Label><Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required placeholder="(13) 98103 8883" /></div>
                   <div><Label htmlFor="message">Mensagem</Label><Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Conte-nos sobre seus objetivos..." /></div>
                   <Button type="submit" className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl text-lg py-3">Enviar Mensagem</Button>
                 </form>
@@ -226,8 +226,8 @@ const Index = () => {
             <div className="space-y-6">
               <h3 className="text-2xl font-poppins">Informações de Contato</h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-4"><Phone className="text-primary-red" size={24} /><div><p className="font-bold">Telefone</p><a href={`tel:${settings?.contact_phone}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumber(settings?.contact_phone || '')}</a></div></div>
-                <div className="flex items-center gap-4"><Mail className="text-primary-red" size={24} /><div><p className="font-bold">E-mail</p><a href="mailto:contato@opperx.com.br" className="text-text-muted hover:text-primary-red">contato@opperx.com.br</a></div></div>
+                <div className="flex items-center gap-4"><Phone className="text-primary-red" size={24} /><div><p className="font-bold">Telefone</p><a href={`tel:${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumber(settings?.contact_phone || '')}</a></div></div>
+                <div className="flex items-center gap-4"><Mail className="text-primary-red" size={24} /><div><p className="font-bold">E-mail</p><a href="mailto:opperstoreofc@gmail.com" className="text-text-muted hover:text-primary-red">opperstoreofc@gmail.com</a></div></div>
                 <div className="flex items-center gap-4"><Instagram className="text-primary-red" size={24} /><div><p className="font-bold">Instagram</p><a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir Instagram ${settings?.instagram}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : settings?.instagram}</a></div></div>
               </div>
               <Button asChild className="w-full bg-green-500 hover:bg-green-600 rounded-xl text-lg py-3"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Phone className="mr-2" /> WhatsApp Direto</a></Button>
@@ -243,7 +243,7 @@ const Index = () => {
             <div><h3 className="text-2xl font-bold text-primary-red mb-4 font-poppins">OPPERX</h3><p className="text-gray-400">Agência de marketing digital focada em resultados.</p></div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
-            <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumber(settings?.contact_phone || '')}</li><li>contato@opperx.com.br</li></ul></div>
+            <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumber(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
           </div>
           <Separator className="bg-gray-700 my-8" />
           <div className="flex flex-col sm:flex-row justify-between items-center text-center">
