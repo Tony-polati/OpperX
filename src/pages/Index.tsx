@@ -63,7 +63,7 @@ const Index = () => {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-20">
-            <img src="/logo.png" alt="OpperX Logo" className="h-14" />
+            <img src="/logo.png" alt="OpperX Logo" className="h-16" />
             <div className="hidden md:flex space-x-8">
               {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
                 <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
@@ -121,7 +121,7 @@ const Index = () => {
             <div className="text-center lg:text-left">
               <h2 className="text-4xl font-poppins mb-6">O fator "X" da OpperX</h2>
               <p className="text-text-muted mb-4">A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.</p>
-              <p className="text-text-muted mb-4">Nosso diferencial está no “X”: o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
+              <p className="text-text-muted mb-4">Nosso diferencial está no "X": o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
               <p className="text-text-muted">Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀</p>
             </div>
             <div className="grid sm:grid-cols-3 gap-6">
@@ -241,7 +241,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <img src="/logo.png" alt="OpperX Logo" className="h-10 mb-4" />
+              <img src="/logo.png" alt="OpperX Logo" className="h-12 mb-4" />
               <p className="text-gray-400">Agência de marketing digital focada em resultados.</p>
             </div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
