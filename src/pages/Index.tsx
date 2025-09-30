@@ -157,6 +157,33 @@ const Index = () => {
     },
   ];
 
+  const servicesData = [
+    { 
+      icon: Users, 
+      title: "Gestão de Redes Sociais", 
+      description: "Criamos conteúdo estratégico e gerenciamos suas redes para construir uma comunidade fiel e engajada.",
+      benefit: "+60% de engajamento médio" 
+    },
+    { 
+      icon: TrendingUp, 
+      title: "Tráfego Pago", 
+      description: "Otimizamos campanhas no Google e Meta para atrair leads qualificados e maximizar seu retorno sobre o investimento.",
+      benefit: "ROI médio de 300%+" 
+    },
+    { 
+      icon: Award, 
+      title: "Branding e Design", 
+      description: "Desenvolvemos uma identidade visual única que conecta sua marca ao público e se destaca no mercado.",
+      benefit: "Identidade visual de impacto" 
+    },
+    { 
+      icon: MessageCircle, 
+      title: "Consultoria Estratégica", 
+      description: "Analisamos seu negócio para criar um plano de marketing digital detalhado e focado em crescimento escalável.",
+      benefit: "Crescimento planejado" 
+    }
+  ];
+
   const formatPhoneNumberForDisplay = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 13) {
@@ -250,24 +277,36 @@ const Index = () => {
       <section id="servicos" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Nossos Serviços</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Estratégias personalizadas para impulsionar seu negócio.</p>
+            <h2 className="text-4xl font-poppins">Transformamos ideias em <span className="text-primary-red">resultados digitais</span> 🚀</h2>
+            <p className="text-lg text-text-muted mt-4 max-w-3xl mx-auto">
+              Mais de 500 projetos entregues com sucesso. Oferecemos estratégias personalizadas para impulsionar seu negócio ao próximo nível.
+            </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Users, title: "Gestão de Redes Sociais", bullets: ["+60% de engajamento", "Conteúdo estratégico", "Análise de métricas"] },
-              { icon: TrendingUp, title: "Tráfego Pago", bullets: ["ROI médio de 300%+", "Campanhas otimizadas", "Segmentação inteligente"] },
-              { icon: Award, title: "Branding e Design", bullets: ["Identidade visual única", "Design responsivo", "Experiência do usuário"] },
-              { icon: MessageCircle, title: "Consultoria Estratégica", bullets: ["Análise completa", "Planejamento detalhado", "Crescimento escalável"] }
-            ].map(service => (
-              <Card key={service.title} className="text-center hover:shadow-xl transition-shadow">
-                <CardHeader><div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4"><service.icon className="text-primary-red" size={32} /></div><CardTitle>{service.title}</CardTitle></CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-text-muted mb-6">{service.bullets.map(bullet => <li key={bullet} className="flex items-center justify-center gap-2"><CheckCircle className="text-primary-red" size={16} />{bullet}</li>)}</ul>
-                  <Button onClick={() => scrollToSection("contato")} className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl">Solicitar Serviço</Button>
+            {servicesData.map(service => (
+              <Card key={service.title} className="text-center flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <CardHeader>
+                  <div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                    <service.icon className="text-primary-red" size={32} />
+                  </div>
+                  <CardTitle>{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow flex flex-col justify-between">
+                  <p className="text-text-muted mb-4">{service.description}</p>
+                  <p className="font-bold text-primary-red">{service.benefit}</p>
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className="text-center mt-16">
+            <h3 className="text-2xl font-poppins mb-4">Quer potencializar seu negócio com nossos serviços?</h3>
+            <p className="text-text-muted mb-6 max-w-2xl mx-auto">Fale com a gente hoje mesmo e descubra como podemos impulsionar seus resultados.</p>
+            <Button 
+              onClick={() => scrollToSection("contato")}
+              className="px-8 py-4 rounded-xl bg-primary-red text-white font-medium shadow-lg hover:bg-primary-red-dark focus:outline-none focus:ring-2 focus:ring-primary-red focus:ring-offset-2 transition-all text-lg"
+            >
+              Solicitar Orçamento
+            </Button>
           </div>
         </div>
       </section>
