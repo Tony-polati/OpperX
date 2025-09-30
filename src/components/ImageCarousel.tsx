@@ -48,17 +48,17 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
         {items.map((item) => (
           <SwiperSlide key={item.id} className="swiper-slide-coverflow">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
               <img
                 src={item.imageUrl}
                 alt={item.title}
                 className="w-full h-80 md:h-96 object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">
                   {item.title}
                 </h3>
-                <p className="text-white/90 text-lg">
+                <p className="text-white/90 text-lg drop-shadow-md">
                   {item.description}
                 </p>
               </div>
