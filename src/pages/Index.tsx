@@ -238,12 +238,13 @@ const Index = () => {
       {/* Navbar */}
       <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50 transition-all duration-300 ${hasScrolled ? 'shadow-md' : ''}`}>
         <div className="container mx-auto px-6 h-24 flex justify-between items-center">
-          <img 
-            src="/logo.png" 
-            alt="OpperX Logo" 
-            className="h-16 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
+          <div 
+            className="text-3xl font-poppins font-bold cursor-pointer"
             onClick={() => scrollToSection("home")}
-          />
+          >
+            <span className="text-text-main">OPPER</span>
+            <span className="text-primary-red">X</span>
+          </div>
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
             {navItems.map((item) => (
