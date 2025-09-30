@@ -5,29 +5,22 @@ import { useEffect } from 'react';
 const ChatbotWidget = () => {
   useEffect(() => {
     // --------------------------------------------------------------------
-    // COLE O SNIPPET DO SEU CHATBOT AQUI
+    // SNIPPET DO CRISP CHAT
     // --------------------------------------------------------------------
-    // O código abaixo é um exemplo de como um snippet pode ser adicionado.
-    // Substitua-o pelo snippet fornecido pelo seu serviço de chatbot (Tidio, Crisp, etc.).
-    /*
-    const script = document.createElement('script');
-    script.src = "//SUA_URL_DO_SCRIPT_AQUI";
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Função de limpeza opcional para remover o script quando o componente for desmontado
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-    */
+    (window as any).$crisp = [];
+    (window as any).CRISP_WEBSITE_ID = "33f3d6c4-9bcc-446a-b0f6-bb2e64f2b94e";
+    
+    (() => {
+      const d = document;
+      const s = d.createElement("script");
+      s.src = "https://client.crisp.chat/l.js";
+      s.async = true;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();
     // --------------------------------------------------------------------
 
   }, []);
 
-  // Este componente não renderiza nada visualmente.
-  // O widget do chatbot será injetado na página pelo script que você colar acima.
   return null;
 };
 
