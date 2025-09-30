@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
-import { ChevronLeft, ChevronRight, Eye, TrendingUp, Users, Award, MessageCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import CaseModal from "./CaseModal";
 
 interface CarouselItem {
@@ -47,27 +47,26 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
 
   return (
     <>
-      <div className="w-full max-w-6xl mx-auto py-12">
+      <div className="relative w-full">
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={"auto"}
           coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
+            rotate: 0,
+            stretch: 80,
+            depth: 200,
             modifier: 1,
-            slideShadows: true,
+            slideShadows: false,
           }}
           navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
           }}
           pagination={{
             clickable: true,
-            dynamicBullets: true,
-            el: ".swiper-pagination",
+            el: ".swiper-pagination-custom",
           }}
           autoplay={{
             delay: 5000,
@@ -80,77 +79,65 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
           {items.map((item) => (
             <SwiperSlide key={item.id} className="swiper-slide-coverflow">
               <div 
-                className="relative group cursor-pointer h-full"
+                className="relative group cursor-pointer h-full rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
                 onClick={() => handleItemClick(item)}
               >
-                {/* Image with proper sizing */}
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-80 md:h-96 object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 
-                {/* Category Tag */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm text-white border border-white/30">
-                    {item.category}
-                  </span>
-                </div>
-                
-                {/* Click indicator */}
-                <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-                    <Eye className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-                
-                {/* Results highlighting - positioned to avoid text cutoff */}
-                <div className="absolute top-16 left-4 right-4 z-20">
-                  <div className="flex gap-2 flex-wrap">
-                    {item.resultsData.map((result, index) => (
-                      <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/30 min-w-[100px]">
-                        <div className="flex items-center gap-1">
-                          <result.icon className="w-4 h-4 text-white" />
-                          <span className="text-white font-bold text-sm">{result.value}</span>
-                        </div>
-                        <span className="text-white/80 text-xs">{result.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Content overlay - positioned to avoid text cutoff */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-20">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 drop-shadow-lg">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/90 text-sm md:text-base drop-shadow-md">
-                    {item.description}
-                  </p>
-                  <div className="mt-3">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm text-white">
-                      Clique para ver detalhes
+                <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
+                  {/* Top Content */}
+                  <div>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm border border-white/30">
+                      {item.category}
                     </span>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {item.resultsData.slice(0, 2).map((result, index) => (
+                        <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/30">
+                          <div className="flex items-center gap-1.5">
+                            <result.icon className="w-4 h-4 text-secondary-yellow" />
+                            <span className="font-bold text-sm">{result.value}</span>
+                          </div>
+                          <span className="text-white/80 text-xs">{result.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom Content */}
+                  <div>
+                    <h3 className="text-2xl font-bold drop-shadow-lg">
+                      {item.title}
+                    </h3>
+                    <p className="text-white/90 drop-shadow-md mt-1">
+                      {item.description}
+                    </p>
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center text-secondary-yellow font-semibold">
+                      Ver detalhes <Eye className="w-4 h-4 ml-2" />
+                    </div>
                   </div>
                 </div>
               </div>
             </SwiperSlide>
           ))}
-          
-          {/* Custom Navigation Buttons */}
-          <div className="swiper-button-next custom-nav-btn">
-            <ChevronRight className="w-8 h-8 text-white" />
-          </div>
-          <div className="swiper-button-prev custom-nav-btn">
-            <ChevronLeft className="w-8 h-8 text-white" />
-          </div>
-          
-          {/* Custom Pagination */}
-          <div className="swiper-pagination !bottom-8"></div>
         </Swiper>
+        
+        {/* Custom Navigation & Pagination Container */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-full p-4">
+            <button className="swiper-button-prev-custom custom-nav-btn mr-4">
+                <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <div className="swiper-pagination-custom"></div>
+            <button className="swiper-button-next-custom custom-nav-btn ml-4">
+                <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+        </div>
       </div>
 
-      {/* Case Modal */}
       <CaseModal 
         item={selectedItem} 
         isOpen={isModalOpen} 

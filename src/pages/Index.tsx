@@ -256,11 +256,11 @@ const Index = () => {
       </section>
 
       {/* Carousel Section */}
-      <section id="portfolio" className="py-20" style={{ backgroundColor: '#f0c000' }}>
+      <section id="portfolio" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
               Explore nossos trabalhos mais impactantes e resultados reais.
             </p>
           </div>
