@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,6 +16,8 @@ import Testimonials from "@/components/Testimonials";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [hasScrolled, setHasScrolled] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +25,41 @@ const Index = () => {
     message: ""
   });
   const { settings, loading } = useSettings();
+
+  useEffect(() => {
+    const sections = ["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"];
+    
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 10);
+
+      const scrollPosition = window.scrollY + 120;
+      
+      let currentSection = "";
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+          currentSection = "contato";
+      }
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const formatWhatsApp = (value: string) => {
     const cleaned = value.replace(/\D/g, '').slice(0, 11);
@@ -184,6 +221,8 @@ const Index = () => {
     }
   ];
 
+  const navItems = ["home", "sobre", "servicos", "portfolio", "depoimentos"];
+
   const formatPhoneNumberForDisplay = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 13) {
@@ -197,34 +236,61 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background-light font-inter">
       {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50">
-        <div className="container mx-auto px-8 py-6 h-32 flex justify-between items-center">
+      <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50 transition-all duration-300 ${hasScrolled ? 'shadow-md' : ''}`}>
+        <div className="container mx-auto px-6 h-24 flex justify-between items-center">
           <img 
             src="/logo.png" 
             alt="OpperX Logo" 
-            className="h-20 md:h-32 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
+            className="h-16 w-auto transition-transform duration-300 hover:scale-105 cursor-pointer" 
             onClick={() => scrollToSection("home")}
           />
+          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
-            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
+            {navItems.map((item) => (
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item)} 
+                className={`capitalize font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[2px] after:bg-primary-red after:transition-transform after:duration-300 after:origin-center ${
+                  activeSection === item 
+                    ? 'text-primary-red after:scale-x-100' 
+                    : 'text-text-main hover:text-primary-red after:scale-x-0 hover:after:scale-x-100'
+                }`}
+              >
                 {item}
               </button>
             ))}
+            <Button onClick={() => scrollToSection("contato")} className="bg-primary-red hover:bg-primary-red-dark rounded-lg">
+              Fale Conosco
+            </Button>
           </div>
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
+        {/* Mobile Menu Panel */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 flex flex-col items-center space-y-4">
-            {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium py-2">
+          <div className="md:hidden bg-white/95 backdrop-blur-lg py-2 border-t border-gray-200 flex flex-col items-center">
+            {navItems.map((item) => (
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item)} 
+                className={`capitalize w-full text-center text-base font-medium py-3 transition-colors ${
+                  activeSection === item 
+                    ? 'text-primary-red bg-red-50' 
+                    : 'text-text-main hover:bg-gray-100'
+                }`}
+              >
                 {item}
               </button>
             ))}
+            <div className="w-full px-4 py-2">
+              <Button onClick={() => scrollToSection("contato")} className="w-full bg-primary-red hover:bg-primary-red-dark rounded-lg">
+                Fale Conosco
+              </Button>
+            </div>
           </div>
         )}
       </nav>
