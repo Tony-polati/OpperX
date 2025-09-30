@@ -12,6 +12,7 @@ import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, I
 import { useSettings } from "@/hooks/useSettings";
 import ImageCarousel from "@/components/ImageCarousel";
 import { showSuccess } from "@/utils/toast";
+import Testimonials from "@/components/Testimonials";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -285,25 +286,7 @@ const Index = () => {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">O Que Nossos Clientes Dizem</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">
-              Histórias de sucesso que nos inspiram a ir além.
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-3 gap-8">
-            {[
-              { name: "Ana Silva", company: "CEO - E-commerce Fashion", quote: "A Opperx transformou nossa presença digital. O resultado foi um aumento de 85% nas vendas online. Competência e resultados acima do esperado!" },
-              { name: "Carlos Mendes", company: "Fundador - Tech Startup", quote: "A consultoria foi fundamental para nosso crescimento. Triplicamos os leads qualificados em 6 meses. Recomendo fortemente!" },
-              { name: "Maria Oliveira", company: "Proprietária - Restaurante", quote: "O trabalho de branding elevou nosso restaurante a outro patamar. A nova identidade visual refletiu em mais reservas e fidelização." }
-            ].map(depoimento => (
-              <Card key={depoimento.name} className="shadow-sm"><CardContent className="p-6"><p className="text-text-muted mb-4 italic">"{depoimento.quote}"</p><div className="flex items-center"><div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div><div><h4 className="font-bold">{depoimento.name}</h4><p className="text-sm text-text-muted">{depoimento.company}</p></div></div></CardContent></Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Testimonials />
 
       {/* Contato */}
       <section id="contato" className="py-20">

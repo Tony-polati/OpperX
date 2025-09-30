@@ -204,3 +204,18 @@
     transform: scale(1) translateY(0);
   }
 }
+
+/* Custom Pagination for Testimonials */
+.swiper-pagination-testimonials .swiper-pagination-bullet {
+  background-color: #d1d5db !important; /* gray-300 */
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-testimonials .swiper-pagination-bullet-active {
+  background-color: #E53935 !important; /* primary-red */
+  transform: scale(1.25) !important;
+}
