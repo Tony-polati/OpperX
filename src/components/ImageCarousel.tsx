@@ -127,13 +127,19 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
         </Swiper>
         
         {/* Custom Navigation & Pagination Container */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-full p-4">
-            <button className="swiper-button-prev-custom custom-nav-btn mr-4">
-                <ChevronLeft className="w-6 h-6 text-white" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-full max-w-xs mx-auto">
+            <button 
+              className="swiper-button-prev-custom custom-nav-btn"
+              aria-label="Slide Anterior"
+            >
+                <ChevronLeft className="w-6 h-6 text-text-main" />
             </button>
-            <div className="swiper-pagination-custom"></div>
-            <button className="swiper-button-next-custom custom-nav-btn ml-4">
-                <ChevronRight className="w-6 h-6 text-white" />
+            <div className="swiper-pagination-custom flex-grow !relative !bottom-0"></div>
+            <button 
+              className="swiper-button-next-custom custom-nav-btn"
+              aria-label="Próximo Slide"
+            >
+                <ChevronRight className="w-6 h-6 text-text-main" />
             </button>
         </div>
       </div>

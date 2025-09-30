@@ -110,47 +110,55 @@
 
 /* Custom Navigation Buttons */
 .custom-nav-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
+  background-color: white;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 48px; /* Larger for mobile */
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb; /* border-gray-200 */
 }
 
 .custom-nav-btn:hover {
-  background: #FFB300; /* secondary-yellow */
-  transform: scale(1.1);
+  background-color: #FFB300; /* secondary-yellow */
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
+
 .custom-nav-btn.swiper-button-disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background-color: #f3f4f6; /* gray-100 */
+  box-shadow: none;
+  transform: scale(1);
 }
 
 /* Custom Pagination */
 .swiper-pagination-custom {
   display: flex !important;
   align-items: center;
-  gap: 8px !important;
+  justify-content: center; /* Center the dots */
+  gap: 12px !important;
+  flex-grow: 1;
+  position: static !important; /* Override swiper inline styles */
 }
 
 .swiper-pagination-custom .swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.4) !important;
-  width: 8px !important;
-  height: 8px !important;
+  background-color: #d1d5db !important; /* gray-300 */
+  width: 10px !important;
+  height: 10px !important;
   border-radius: 50% !important;
   transition: all 0.3s ease !important;
   opacity: 1 !important;
 }
 
 .swiper-pagination-custom .swiper-pagination-bullet-active {
-  background: #FFB300 !important; /* secondary-yellow */
-  transform: scale(1.3) !important;
+  background-color: #E53935 !important; /* primary-red */
+  transform: scale(1.25) !important;
 }
 
 
