@@ -480,7 +480,7 @@ const Index = () => {
             {/* Col 2: Services */}
             <div className="md:col-span-2">
               <h4 className="font-bold text-lg mb-4 text-white">Serviços</h4>
-              <ul className="space-y-3 text-white">
+              <ul className="space-y-3 text-gray-400">
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Gestão de Redes Sociais</button></li>
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Tráfego Pago</button></li>
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Branding e Design</button></li>
@@ -490,7 +490,7 @@ const Index = () => {
             {/* Col 3: Company */}
             <div className="md:col-span-2">
               <h4 className="font-bold text-lg mb-4 text-white">Empresa</h4>
-              <ul className="space-y-3 text-white">
+              <ul className="space-y-3 text-gray-400">
                 <li><button onClick={() => scrollToSection("sobre")} className="hover:text-secondary-yellow transition-colors">Sobre</button></li>
                 <li><button onClick={() => scrollToSection("portfolio")} className="hover:text-secondary-yellow transition-colors">Portfólio</button></li>
                 <li><button onClick={() => scrollToSection("contato")} className="hover:text-secondary-yellow transition-colors">Contato</button></li>
@@ -500,7 +500,7 @@ const Index = () => {
             {/* Col 4: Contact & Social */}
             <div className="md:col-span-4">
               <h4 className="font-bold text-lg mb-4 text-white">Fale Conosco</h4>
-              <ul className="space-y-4 text-white mb-6">
+              <ul className="space-y-4 text-gray-400 mb-6">
                 <li className="flex items-start gap-3">
                   <Phone size={18} className="mt-1 text-secondary-yellow flex-shrink-0" />
                   <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="hover:text-secondary-yellow transition-colors">
