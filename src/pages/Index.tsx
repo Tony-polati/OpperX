@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, Clock, ShieldCheck } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
 import ImageCarousel from "@/components/ImageCarousel";
+import { showSuccess } from "@/utils/toast";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ const Index = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Recebemos seu contato! Nossa equipe retornará em até 24h.");
+    showSuccess("Recebemos seu contato! Nossa equipe retornará em até 24h.");
     setFormData({ name: "", email: "", whatsapp: "", message: "" });
   };
 
@@ -309,7 +310,10 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Entre em contato e receba uma proposta exclusiva em até 24h.</p>
+            <div className="mt-4 inline-flex items-center gap-3 bg-secondary-yellow/10 text-text-main text-lg font-semibold px-6 py-3 rounded-full border border-secondary-yellow/30 shadow-sm">
+              <Clock className="text-secondary-yellow" size={24} />
+              <p>Entre em contato e receba uma proposta exclusiva em até 24h.</p>
+            </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <Card className="shadow-lg border-t-4 border-primary-red">
