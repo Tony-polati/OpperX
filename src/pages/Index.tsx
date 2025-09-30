@@ -479,8 +479,8 @@ const Index = () => {
 
             {/* Col 2: Services */}
             <div className="md:col-span-2">
-              <h4 className="font-bold text-lg mb-4">Serviços</h4>
-              <ul className="space-y-3 text-gray-400">
+              <h4 className="font-bold text-lg mb-4 text-white">Serviços</h4>
+              <ul className="space-y-3 text-white">
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Gestão de Redes Sociais</button></li>
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Tráfego Pago</button></li>
                 <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Branding e Design</button></li>
@@ -489,8 +489,8 @@ const Index = () => {
 
             {/* Col 3: Company */}
             <div className="md:col-span-2">
-              <h4 className="font-bold text-lg mb-4">Empresa</h4>
-              <ul className="space-y-3 text-gray-400">
+              <h4 className="font-bold text-lg mb-4 text-white">Empresa</h4>
+              <ul className="space-y-3 text-white">
                 <li><button onClick={() => scrollToSection("sobre")} className="hover:text-secondary-yellow transition-colors">Sobre</button></li>
                 <li><button onClick={() => scrollToSection("portfolio")} className="hover:text-secondary-yellow transition-colors">Portfólio</button></li>
                 <li><button onClick={() => scrollToSection("contato")} className="hover:text-secondary-yellow transition-colors">Contato</button></li>
@@ -499,22 +499,22 @@ const Index = () => {
 
             {/* Col 4: Contact & Social */}
             <div className="md:col-span-4">
-              <h4 className="font-bold text-lg mb-4">Fale Conosco</h4>
-              <ul className="space-y-4 text-gray-400 mb-6">
+              <h4 className="font-bold text-lg mb-4 text-white">Fale Conosco</h4>
+              <ul className="space-y-4 text-white mb-6">
                 <li className="flex items-start gap-3">
                   <Phone size={18} className="mt-1 text-secondary-yellow flex-shrink-0" />
-                  <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="hover:text-white transition-colors">
+                  <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="hover:text-secondary-yellow transition-colors">
                     {loading ? 'Carregando...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail size={18} className="mt-1 text-secondary-yellow flex-shrink-0" />
-                  <a href="mailto:opperstoreofc@gmail.com" className="hover:text-white transition-colors">
+                  <a href="mailto:opperstoreofc@gmail.com" className="hover:text-secondary-yellow transition-colors">
                     opperstoreofc@gmail.com
                   </a>
                 </li>
               </ul>
-              <h4 className="font-bold text-lg mb-4">Siga-nos</h4>
+              <h4 className="font-bold text-lg mb-4 text-white">Siga-nos</h4>
               <div className="flex space-x-4">
                 <a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-gray-800 rounded-full hover:bg-primary-red transition-colors group">
                   <Instagram size={20} className="text-white" />
