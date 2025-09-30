@@ -1,15 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, ArrowRight, ChevronLeft, ChevronRight as ChevronRightIcon, Clock, ShieldCheck } from "lucide-react";
+import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, Clock, ShieldCheck } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
 import ImageCarousel from "@/components/ImageCarousel";
 
@@ -23,15 +22,31 @@ const Index = () => {
   });
   const { settings, loading } = useSettings();
 
+  const formatWhatsApp = (value: string) => {
+    const cleaned = value.replace(/\D/g, '').slice(0, 11);
+    let formatted = cleaned;
+    if (cleaned.length > 2) {
+      formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2)}`;
+    }
+    if (cleaned.length > 7) {
+      formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
+    }
+    return formatted;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Obrigado! Entraremos em contato em até 24h.");
+    alert("Recebemos seu contato! Nossa equipe retornará em até 24h.");
     setFormData({ name: "", email: "", whatsapp: "", message: "" });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === "whatsapp") {
+      setFormData(prev => ({ ...prev, [name]: formatWhatsApp(value) }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -140,15 +155,15 @@ const Index = () => {
     },
   ];
 
-  const formatPhoneNumber = (phone: string) => {
+  const formatPhoneNumberForDisplay = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 13) {
-      return `(${cleaned.substring(2, 4)}) ${cleaned.substring(4, 9)} ${cleaned.substring(9)}`;
+      return `(${cleaned.substring(2, 4)}) ${cleaned.substring(4, 9)}-${cleaned.substring(9)}`;
     }
     return phone;
   };
 
-  const whatsappUrl = `https://wa.me/5513981038883?text=${encodeURIComponent("Olá, quero solicitar um orçamento.")}`;
+  const whatsappUrl = `https://wa.me/${settings?.contact_phone?.replace(/\D/g, '') || '5513981038883'}?text=${encodeURIComponent("Olá, quero solicitar um orçamento.")}`;
 
   return (
     <div className="min-h-screen bg-background-light font-inter">
@@ -164,7 +179,7 @@ const Index = () => {
           <div className="hidden md:flex space-x-8 items-center">
             {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
               <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium">
-                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
+                {item}
               </button>
             ))}
           </div>
@@ -178,7 +193,7 @@ const Index = () => {
           <div className="md:hidden py-4 border-t border-gray-200 flex flex-col items-center space-y-4">
             {["home", "sobre", "servicos", "portfolio", "depoimentos", "contato"].map((item) => (
               <button key={item} onClick={() => scrollToSection(item)} className="capitalize text-text-main hover:text-primary-red transition-colors font-medium py-2">
-                {item === 'home' ? 'Home' : item === 'sobre' ? 'Sobre' : item === 'servicos' ? 'Serviços' : item === 'portfolio' ? 'Portfólio' : item === 'depoimentos' ? 'Depoimentos' : 'Contato'}
+                {item}
               </button>
             ))}
           </div>
@@ -296,28 +311,57 @@ const Index = () => {
             <h2 className="text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
             <p className="text-lg text-text-muted mt-4 max-w-2xl mx-auto">Entre em contato e receba uma proposta exclusiva em até 24h.</p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <Card className="shadow-lg">
-              <CardHeader><CardTitle>Solicite um Orçamento</CardTitle><CardDescription>Preencha o formulário e nossa equipe entrará em contato.</CardDescription></CardHeader>
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <Card className="shadow-lg border-t-4 border-primary-red">
+              <CardHeader>
+                <CardTitle className="text-2xl">Solicite um Orçamento</CardTitle>
+                <CardDescription>Preencha o formulário e nossa equipe entrará em contato.</CardDescription>
+              </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div><Label htmlFor="name">Nome Completo</Label><Input id="name" name="name" value={formData.name} onChange={handleInputChange} required /></div>
-                  <div><Label htmlFor="email">E-mail</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} required /></div>
-                  <div><Label htmlFor="whatsapp">WhatsApp</Label><Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required placeholder="(13) 98103 8883" /></div>
-                  <div><Label htmlFor="message">Mensagem</Label><Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Conte-nos sobre seus objetivos..." /></div>
-                  <Button type="submit" className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl text-lg py-3">Enviar Mensagem</Button>
+                  <div><Label htmlFor="name">Nome Completo</Label><Input id="name" name="name" value={formData.name} onChange={handleInputChange} required placeholder="Digite seu nome completo" /></div>
+                  <div><Label htmlFor="email">E-mail</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="seuemail@exemplo.com" /></div>
+                  <div><Label htmlFor="whatsapp">WhatsApp</Label><Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required placeholder="(99) 99999-9999" /></div>
+                  <div><Label htmlFor="message">Mensagem</Label><Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Ex.: Quero aumentar minhas vendas com tráfego pago." /></div>
+                  <Button type="submit" className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl text-lg py-3 font-bold">Quero Receber Proposta</Button>
                 </form>
+                <div className="mt-6 space-y-2 text-sm text-text-muted">
+                  <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Resposta em até 24h</p>
+                  <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Atendimento personalizado</p>
+                  <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Mais de 500 clientes satisfeitos</p>
+                </div>
               </CardContent>
             </Card>
-            <div className="space-y-6">
-              <h3 className="text-2xl font-poppins">Informações de Contato</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4"><Phone className="text-primary-red" size={24} /><div><p className="font-bold">Telefone</p><a href={`tel:${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumber(settings?.contact_phone || '')}</a></div></div>
-                <div className="flex items-center gap-4"><Mail className="text-primary-red" size={24} /><div><p className="font-bold">E-mail</p><a href="mailto:opperstoreofc@gmail.com" className="text-text-muted hover:text-primary-red">opperstoreofc@gmail.com</a></div></div>
-                <div className="flex items-center gap-4"><Instagram className="text-primary-red" size={24} /><div><p className="font-bold">Instagram</p><a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir Instagram ${settings?.instagram}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : settings?.instagram}</a></div></div>
-              </div>
-              <Button asChild className="w-full bg-green-500 hover:bg-green-600 rounded-xl text-lg py-3"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Phone className="mr-2" /> WhatsApp Direto</a></Button>
-            </div>
+            <Card className="shadow-lg border-t-4 border-secondary-yellow flex flex-col">
+              <CardHeader>
+                <CardTitle className="text-2xl">Informações de Contato</CardTitle>
+                <CardDescription>Prefere um contato mais direto? Fale conosco!</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow flex flex-col justify-center space-y-6">
+                <Button asChild className="w-full bg-green-500 hover:bg-green-600 rounded-xl text-lg py-3 font-bold"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Phone className="mr-2" /> Chamar no WhatsApp</a></Button>
+                <div className="flex items-center gap-4">
+                  <div className="bg-secondary-yellow rounded-full p-3"><Phone className="text-white" size={20} /></div>
+                  <div>
+                    <p className="font-bold">Telefone</p>
+                    <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="bg-secondary-yellow rounded-full p-3"><Mail className="text-white" size={20} /></div>
+                  <div>
+                    <p className="font-bold">E-mail</p>
+                    <a href="mailto:opperstoreofc@gmail.com" className="text-text-muted hover:text-primary-red">opperstoreofc@gmail.com</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="bg-secondary-yellow rounded-full p-3"><Instagram className="text-white" size={20} /></div>
+                  <div>
+                    <p className="font-bold">Instagram</p>
+                    <a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir Instagram ${settings?.instagram}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : settings?.instagram}</a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -332,7 +376,7 @@ const Index = () => {
             </div>
             <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
             <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
-            <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumber(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
+            <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
           </div>
           <Separator className="bg-gray-700 my-8" />
           <div className="flex flex-col sm:flex-row justify-between items-center text-center">
