@@ -43,11 +43,71 @@ const Index = () => {
   };
 
   const carouselItems = [
-    { id: 1, title: "Campanha Social", description: "Aumento de engajamento em 40%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
-    { id: 2, title: "Tráfego Pago", description: "ROI de 320% em 3 meses", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
-    { id: 3, title: "Branding", description: "Reconhecimento de marca +75%", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
-    { id: 4, title: "Marketing Digital", description: "Resultados mensuráveis", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
-    { id: 5, title: "Design Criativo", description: "Identidade visual única", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+    {
+      id: 1,
+      title: "Campanha Social",
+      description: "Aumento de engajamento em 40%",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      challenge: "Cliente precisava aumentar o engajamento em redes sociais para lançar novo produto.",
+      solution: "Desenvolvemos estratégia de conteúdo com foco em storytelling e interação com a comunidade.",
+      results: "Aumento de 40% no engajamento, 25% mais seguidores e 15% de crescimento nas vendas.",
+      extraImages: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ]
+    },
+    {
+      id: 2,
+      title: "Tráfego Pago",
+      description: "ROI de 320% em 3 meses",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      challenge: "E-commerce precisava gerar leads qualificados com baixo custo por aquisição.",
+      solution: "Campanhas segmentadas no Facebook e Google com otimização contínua de anúncios.",
+      results: "ROI de 320%, redução de 45% no custo por lead e aumento de 60% nas conversões.",
+      extraImages: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ]
+    },
+    {
+      id: 3,
+      title: "Branding",
+      description: "Reconhecimento de marca +75%",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      challenge: "Startup precisava criar identidade visual forte para se destacar no mercado.",
+      solution: "Desenvolvemos logo, paleta de cores e guia de marca completo.",
+      results: "Aumento de 75% no reconhecimento de marca e 30% mais engajamento em redes.",
+      extraImages: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ]
+    },
+    {
+      id: 4,
+      title: "Marketing Digital",
+      description: "Resultados mensuráveis",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      challenge: "Empresa tradicional precisava migrar para o digital.",
+      solution: "Estratégia completa de inbound marketing com conteúdo SEO e redes sociais.",
+      results: "200% mais tráfego orgânico, 150% mais leads e 80% de aumento em vendas online.",
+      extraImages: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ]
+    },
+    {
+      id: 5,
+      title: "Design Criativo",
+      description: "Identidade visual única",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      challenge: "Agência de eventos precisava de identidade visual impactante.",
+      solution: "Design moderno e vibrante com foco em experiências memoráveis.",
+      results: "Aumento de 90% nas reservas e reconhecimento instantâneo da marca.",
+      extraImages: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ]
+    },
   ];
 
   const formatPhoneNumber = (phone: string) => {
