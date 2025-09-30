@@ -459,19 +459,72 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-text-main text-white py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div className="flex flex-col items-center md:items-start">
-              <img src="/logo.png" alt="OpperX Logo" className="h-16 md:h-24 w-auto mb-4" />
-              <p className="text-gray-400 text-center md:text-left">Agência de marketing digital focada em resultados.</p>
+      <footer className="bg-text-main text-white">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {/* Col 1: Logo and About */}
+            <div className="md:col-span-4">
+              <div 
+                className="text-4xl font-poppins font-bold mb-4 cursor-pointer"
+                onClick={() => scrollToSection("home")}
+              >
+                <span className="text-white">OPPER</span>
+                <span className="text-primary-red">X</span>
+              </div>
+              <p className="text-gray-400 pr-8">
+                Agência de marketing digital focada em transformar ideias em resultados reais e mensuráveis.
+              </p>
             </div>
-            <div><h4 className="font-bold mb-4">Serviços</h4><ul className="space-y-2 text-gray-400">{["Gestão de Redes Sociais", "Tráfego Pago", "Branding e Design"].map(s => <li key={s}><button onClick={() => scrollToSection("servicos")} className="hover:text-white">{s}</button></li>)}</ul></div>
-            <div><h4 className="font-bold mb-4">Empresa</h4><ul className="space-y-2 text-gray-400">{["Sobre", "Portfólio", "Contato"].map(s => <li key={s}><button onClick={() => scrollToSection(s.toLowerCase())} className="hover:text-white">{s}</button></li>)}</ul></div>
-            <div><h4 className="font-bold mb-4">Contato</h4><ul className="space-y-2 text-gray-400"><li>{loading ? '...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}</li><li>opperstoreofc@gmail.com</li></ul></div>
+
+            {/* Col 2: Services */}
+            <div className="md:col-span-2">
+              <h4 className="font-bold text-lg mb-4">Serviços</h4>
+              <ul className="space-y-3 text-gray-400">
+                <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Gestão de Redes Sociais</button></li>
+                <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Tráfego Pago</button></li>
+                <li><button onClick={() => scrollToSection("servicos")} className="hover:text-secondary-yellow transition-colors">Branding e Design</button></li>
+              </ul>
+            </div>
+
+            {/* Col 3: Company */}
+            <div className="md:col-span-2">
+              <h4 className="font-bold text-lg mb-4">Empresa</h4>
+              <ul className="space-y-3 text-gray-400">
+                <li><button onClick={() => scrollToSection("sobre")} className="hover:text-secondary-yellow transition-colors">Sobre</button></li>
+                <li><button onClick={() => scrollToSection("portfolio")} className="hover:text-secondary-yellow transition-colors">Portfólio</button></li>
+                <li><button onClick={() => scrollToSection("contato")} className="hover:text-secondary-yellow transition-colors">Contato</button></li>
+              </ul>
+            </div>
+
+            {/* Col 4: Contact & Social */}
+            <div className="md:col-span-4">
+              <h4 className="font-bold text-lg mb-4">Fale Conosco</h4>
+              <ul className="space-y-4 text-gray-400 mb-6">
+                <li className="flex items-start gap-3">
+                  <Phone size={18} className="mt-1 text-secondary-yellow flex-shrink-0" />
+                  <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="hover:text-white transition-colors">
+                    {loading ? 'Carregando...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mail size={18} className="mt-1 text-secondary-yellow flex-shrink-0" />
+                  <a href="mailto:opperstoreofc@gmail.com" className="hover:text-white transition-colors">
+                    opperstoreofc@gmail.com
+                  </a>
+                </li>
+              </ul>
+              <h4 className="font-bold text-lg mb-4">Siga-nos</h4>
+              <div className="flex space-x-4">
+                <a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-gray-800 rounded-full hover:bg-primary-red transition-colors group">
+                  <Instagram size={20} className="text-white" />
+                </a>
+              </div>
+            </div>
           </div>
-          <Separator className="bg-gray-700 my-8" />
-          <div className="flex flex-col sm:flex-row justify-between items-center text-center">
+          
+          <Separator className="bg-gray-700 my-12" />
+          
+          <div className="flex flex-col sm:flex-row justify-between items-center text-center gap-4">
             <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Opperx. Todos os direitos reservados.</p>
             <MadeWithDyad />
           </div>
