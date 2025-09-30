@@ -166,7 +166,7 @@ const Index = () => {
       </section>
 
       {/* Carousel Section */}
-      <section id="portfolio" className="py-20" style={{ backgroundColor: '#fee908' }}>
+      <section id="portfolio" className="py-20" style={{ backgroundColor: '#f0c000' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
