@@ -86,6 +86,7 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
                   src={item.imageUrl}
                   alt={item.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 

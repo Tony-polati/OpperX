@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { motion } from "framer-motion";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,9 +11,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Menu, X, CheckCircle, TrendingUp, Users, Award, MessageCircle, Phone, Instagram, Mail, Clock, ShieldCheck } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
-import ImageCarousel from "@/components/ImageCarousel";
 import { showSuccess } from "@/utils/toast";
-import Testimonials from "@/components/Testimonials";
+import AnimatedSection from "@/components/AnimatedSection";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const ImageCarousel = lazy(() => import("@/components/ImageCarousel"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+
+const LoadingFallback = () => (
+  <div className="container mx-auto px-6">
+    <div className="flex flex-col items-center text-center mb-12">
+      <Skeleton className="h-10 w-3/4 mb-4" />
+      <Skeleton className="h-6 w-1/2" />
+    </div>
+    <div className="flex justify-center">
+      <Skeleton className="h-96 w-full max-w-sm" />
+    </div>
+  </div>
+);
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -233,6 +249,19 @@ const Index = () => {
 
   const whatsappUrl = `https://wa.me/${settings?.contact_phone?.replace(/\D/g, '') || '5513981038883'}?text=${encodeURIComponent("Olá, quero solicitar um orçamento.")}`;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+  };
+
   return (
     <div className="min-h-screen bg-background-light font-inter">
       {/* Navbar */}
@@ -298,31 +327,36 @@ const Index = () => {
 
       {/* Hero Section */}
       <section id="home" className="pt-40 pb-20 bg-white">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl leading-tight font-poppins">
+        <motion.div 
+          className="container mx-auto px-6 text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl leading-tight font-poppins">
             Transformamos marcas em <span className="text-primary-red">experiências memoráveis</span>
-          </h1>
-          <p className="mt-4 text-lg text-text-muted max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p variants={itemVariants} className="mt-4 text-lg text-text-muted max-w-3xl mx-auto">
             Estratégias de marketing digital que geram leads qualificados e crescimento mensurável.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          </motion.p>
+          <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-xl bg-primary-red text-white font-medium shadow-lg hover:bg-primary-red-dark focus:outline-none focus:ring-2 focus:ring-primary-red focus:ring-offset-2 transition-all">
               Peça um orçamento
             </a>
             <button onClick={() => scrollToSection("servicos")} className="px-8 py-4 rounded-xl border-2 border-primary-red text-primary-red font-medium hover:bg-secondary-yellow hover:text-text-main hover:border-secondary-yellow transition-all">
               Conheça nossos serviços
             </button>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 justify-center text-text-muted">
+          </motion.div>
+          <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-x-8 gap-y-4 justify-center text-text-muted">
             <div className="flex items-center gap-2"><Clock size={16} /> Resposta em até 24h</div>
             <div className="flex items-center gap-2"><Users size={16} /> +500 Clientes Atendidos</div>
             <div className="flex items-center gap-2"><ShieldCheck size={16} /> 95% de Satisfação</div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Sobre / Credenciais */}
-      <section id="sobre" className="py-20">
+      <AnimatedSection id="sobre" className="py-20">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
@@ -338,10 +372,10 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Serviços */}
-      <section id="servicos" className="py-20 bg-white">
+      <AnimatedSection id="servicos" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">Transformamos ideias em <span className="text-primary-red">resultados digitais</span> 🚀</h2>
@@ -349,22 +383,30 @@ const Index = () => {
               Mais de 500 projetos entregues com sucesso. Oferecemos estratégias personalizadas para impulsionar seu negócio ao próximo nível.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {servicesData.map(service => (
-              <Card key={service.title} className="text-center flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
-                    <service.icon className="text-primary-red" size={32} />
-                  </div>
-                  <CardTitle>{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow flex flex-col justify-between">
-                  <p className="text-text-muted mb-4">{service.description}</p>
-                  <p className="font-bold text-primary-red">{service.benefit}</p>
-                </CardContent>
-              </Card>
+              <motion.div key={service.title} variants={itemVariants} className="h-full">
+                <Card className="text-center flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <CardHeader>
+                    <div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                      <service.icon className="text-primary-red" size={32} />
+                    </div>
+                    <CardTitle>{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex flex-col justify-between">
+                    <p className="text-text-muted mb-4">{service.description}</p>
+                    <p className="font-bold text-primary-red">{service.benefit}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="text-center mt-16">
             <h3 className="text-2xl font-poppins mb-4">Quer potencializar seu negócio com nossos serviços?</h3>
             <p className="text-text-muted mb-6 max-w-2xl mx-auto">Fale com a gente hoje mesmo e descubra como podemos impulsionar seus resultados.</p>
@@ -376,26 +418,30 @@ const Index = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Carousel Section */}
-      <section id="portfolio" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
-              Explore nossos trabalhos mais impactantes e resultados reais.
-            </p>
+      <AnimatedSection id="portfolio" className="py-20 bg-gray-50">
+        <Suspense fallback={<LoadingFallback />}>
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
+              <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+                Explore nossos trabalhos mais impactantes e resultados reais.
+              </p>
+            </div>
+            <ImageCarousel items={carouselItems} />
           </div>
-          <ImageCarousel items={carouselItems} />
-        </div>
-      </section>
+        </Suspense>
+      </AnimatedSection>
 
       {/* Depoimentos */}
-      <Testimonials />
+      <Suspense fallback={<LoadingFallback />}>
+        <Testimonials />
+      </Suspense>
 
       {/* Contato */}
-      <section id="contato" className="py-20">
+      <AnimatedSection id="contato" className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
@@ -457,7 +503,7 @@ const Index = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Footer */}
       <footer className="bg-text-main text-white">
