@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
-import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, TrendingUp, Users, Award, MessageCircle } from "lucide-react";
 import CaseModal from "./CaseModal";
 
 interface CarouselItem {
@@ -19,6 +19,12 @@ interface CarouselItem {
   solution: string;
   results: string;
   extraImages?: string[];
+  category: string;
+  resultsData: {
+    icon: React.ComponentType<any>;
+    value: string;
+    label: string;
+  }[];
 }
 
 interface ImageCarouselProps {
@@ -87,10 +93,32 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
                   className="w-full h-80 md:h-96 object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
                 />
                 
+                {/* Category Tag */}
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm text-white border border-white/30">
+                    {item.category}
+                  </span>
+                </div>
+                
                 {/* Click indicator */}
                 <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
                     <Eye className="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                
+                {/* Results highlighting */}
+                <div className="absolute top-16 left-4 right-4 z-20">
+                  <div className="flex gap-2">
+                    {item.resultsData.map((result, index) => (
+                      <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/30">
+                        <div className="flex items-center gap-1">
+                          <result.icon className="w-4 h-4 text-white" />
+                          <span className="text-white font-bold text-sm">{result.value}</span>
+                        </div>
+                        <span className="text-white/80 text-xs">{result.label}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 

@@ -54,6 +54,12 @@ const Index = () => {
       extraImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ],
+      category: "Social Media",
+      resultsData: [
+        { icon: TrendingUp, value: "+40%", label: "Engajamento" },
+        { icon: Users, value: "+25%", label: "Seguidores" },
+        { icon: Award, value: "+15%", label: "Vendas" }
       ]
     },
     {
@@ -67,6 +73,12 @@ const Index = () => {
       extraImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ],
+      category: "Tráfego Pago",
+      resultsData: [
+        { icon: TrendingUp, value: "320%", label: "ROI" },
+        { icon: Users, value: "-45%", label: "Custo/Lead" },
+        { icon: Award, value: "+60%", label: "Conversões" }
       ]
     },
     {
@@ -80,6 +92,12 @@ const Index = () => {
       extraImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ],
+      category: "Branding",
+      resultsData: [
+        { icon: TrendingUp, value: "+75%", label: "Reconhecimento" },
+        { icon: Users, value: "+30%", label: "Engajamento" },
+        { icon: Award, value: "100%", label: "Satisfação" }
       ]
     },
     {
@@ -93,6 +111,12 @@ const Index = () => {
       extraImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ],
+      category: "Marketing Digital",
+      resultsData: [
+        { icon: TrendingUp, value: "+200%", label: "Tráfego Orgânico" },
+        { icon: Users, value: "+150%", label: "Leads" },
+        { icon: Award, value: "+80%", label: "Vendas Online" }
       ]
     },
     {
@@ -106,6 +130,12 @@ const Index = () => {
       extraImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      ],
+      category: "Design",
+      resultsData: [
+        { icon: TrendingUp, value: "+90%", label: "Reservas" },
+        { icon: Users, value: "100%", label: "Reconhecimento" },
+        { icon: Award, value: "+45%", label: "Engajamento" }
       ]
     },
   ];
