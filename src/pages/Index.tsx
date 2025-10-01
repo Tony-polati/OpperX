@@ -14,6 +14,7 @@ import { useSettings } from "@/hooks/useSettings";
 import { showSuccess } from "@/utils/toast";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const ImageCarousel = lazy(() => import("@/components/ImageCarousel"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
@@ -263,15 +264,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-light font-inter">
+    <div className="min-h-screen bg-background-light dark:bg-text-main font-inter">
       {/* Navbar */}
-      <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50 transition-all duration-300 ${hasScrolled ? 'shadow-md' : ''}`}>
+      <nav className={`fixed top-0 w-full bg-white/80 dark:bg-text-main/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 z-50 transition-all duration-300 ${hasScrolled ? 'shadow-md' : ''}`}>
         <div className="container mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
           <div 
             className="text-3xl font-poppins font-bold cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
-            <span className="text-text-main">OPPER</span>
+            <span className="text-text-main dark:text-white">OPPER</span>
             <span className="text-primary-red">X</span>
           </div>
           {/* Desktop Menu */}
@@ -283,7 +284,7 @@ const Index = () => {
                 className={`capitalize font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[2px] after:bg-primary-red after:transition-transform after:duration-300 after:origin-center ${
                   activeSection === item 
                     ? 'text-primary-red after:scale-x-100' 
-                    : 'text-text-main hover:text-primary-red after:scale-x-0 hover:after:scale-x-100'
+                    : 'text-text-main dark:text-gray-300 hover:text-primary-red after:scale-x-0 hover:after:scale-x-100'
                 }`}
               >
                 {item}
@@ -292,25 +293,27 @@ const Index = () => {
             <Button onClick={() => scrollToSection("contato")} className="bg-primary-red hover:bg-primary-red-dark rounded-lg">
               Fale Conosco
             </Button>
+            <ThemeToggle />
           </div>
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main">
+          <div className="md:hidden flex items-center gap-4">
+            <ThemeToggle />
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text-main dark:text-gray-300">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
         {/* Mobile Menu Panel */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-lg py-2 border-t border-gray-200 flex flex-col items-center">
+          <div className="md:hidden bg-white/95 dark:bg-text-main/95 backdrop-blur-lg py-2 border-t border-gray-200 dark:border-gray-800 flex flex-col items-center">
             {navItems.map((item) => (
               <button 
                 key={item} 
                 onClick={() => scrollToSection(item)} 
                 className={`capitalize w-full text-center text-base font-medium py-3 transition-colors ${
                   activeSection === item 
-                    ? 'text-primary-red bg-red-50' 
-                    : 'text-text-main hover:bg-gray-100'
+                    ? 'text-primary-red bg-red-50 dark:bg-primary-red/10' 
+                    : 'text-text-main dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 {item}
@@ -326,7 +329,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-28 md:pt-40 pb-20 bg-white">
+      <section id="home" className="pt-28 md:pt-40 pb-20 bg-white dark:bg-text-main">
         <motion.div 
           className="container mx-auto px-6 text-center"
           variants={containerVariants}
@@ -336,7 +339,7 @@ const Index = () => {
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl leading-tight font-poppins">
             Transformamos marcas em <span className="text-primary-red">experiências memoráveis</span>
           </motion.h1>
-          <motion.p variants={itemVariants} className="mt-4 text-lg text-text-muted max-w-3xl mx-auto">
+          <motion.p variants={itemVariants} className="mt-4 text-lg text-text-muted dark:text-gray-400 max-w-3xl mx-auto">
             Estratégias de marketing digital que geram leads qualificados e crescimento mensurável.
           </motion.p>
           <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -347,7 +350,7 @@ const Index = () => {
               Conheça nossos serviços
             </button>
           </motion.div>
-          <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-x-8 gap-y-4 justify-center text-text-muted">
+          <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-x-8 gap-y-4 justify-center text-text-muted dark:text-gray-400">
             <div className="flex items-center gap-2"><Clock size={16} /> Resposta em até 24h</div>
             <div className="flex items-center gap-2"><Users size={16} /> +500 Clientes Atendidos</div>
             <div className="flex items-center gap-2"><ShieldCheck size={16} /> 95% de Satisfação</div>
@@ -361,25 +364,25 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <h2 className="text-3xl md:text-4xl font-poppins mb-6">O fator "X" da OpperX</h2>
-              <p className="text-text-muted mb-4">A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.</p>
-              <p className="text-text-muted mb-4">Nosso diferencial está no "X": o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
-              <p className="text-text-muted">Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀</p>
+              <p className="text-text-muted dark:text-gray-400 mb-4">A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.</p>
+              <p className="text-text-muted dark:text-gray-400 mb-4">Nosso diferencial está no "X": o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
+              <p className="text-text-muted dark:text-gray-400">Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀</p>
             </div>
             <div className="grid sm:grid-cols-3 gap-6">
-              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">10+</p><p className="text-text-muted">Anos de Experiência</p></CardContent></Card>
-              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">500+</p><p className="text-text-muted">Clientes Atendidos</p></CardContent></Card>
-              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">95%</p><p className="text-text-muted">de Satisfação</p></CardContent></Card>
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">10+</p><p className="text-text-muted dark:text-gray-400">Anos de Experiência</p></CardContent></Card>
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">500+</p><p className="text-text-muted dark:text-gray-400">Clientes Atendidos</p></CardContent></Card>
+              <Card className="text-center shadow-sm"><CardContent className="p-6"><p className="text-4xl font-bold text-primary-red mb-2">95%</p><p className="text-text-muted dark:text-gray-400">de Satisfação</p></CardContent></Card>
             </div>
           </div>
         </div>
       </AnimatedSection>
 
       {/* Serviços */}
-      <AnimatedSection id="servicos" className="py-20 bg-white">
+      <AnimatedSection id="servicos" className="py-20 bg-white dark:bg-text-main">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-poppins">Transformamos ideias em <span className="text-primary-red">resultados digitais</span> 🚀</h2>
-            <p className="text-lg text-text-muted mt-4 max-w-3xl mx-auto">
+            <p className="text-lg text-text-muted dark:text-gray-400 mt-4 max-w-3xl mx-auto">
               Mais de 500 projetos entregues com sucesso. Oferecemos estratégias personalizadas para impulsionar seu negócio ao próximo nível.
             </p>
           </div>
@@ -394,13 +397,13 @@ const Index = () => {
               <motion.div key={service.title} variants={itemVariants} className="h-full">
                 <Card className="text-center flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
-                    <div className="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                    <div className="mx-auto w-16 h-16 bg-red-50 dark:bg-primary-red/10 rounded-full flex items-center justify-center mb-4">
                       <service.icon className="text-primary-red" size={32} />
                     </div>
                     <CardTitle>{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col justify-between">
-                    <p className="text-text-muted mb-4">{service.description}</p>
+                    <p className="text-text-muted dark:text-gray-400 mb-4">{service.description}</p>
                     <p className="font-bold text-primary-red">{service.benefit}</p>
                   </CardContent>
                 </Card>
@@ -409,7 +412,7 @@ const Index = () => {
           </motion.div>
           <div className="text-center mt-16">
             <h3 className="text-2xl font-poppins mb-4">Quer potencializar seu negócio com nossos serviços?</h3>
-            <p className="text-text-muted mb-6 max-w-2xl mx-auto">Fale com a gente hoje mesmo e descubra como podemos impulsionar seus resultados.</p>
+            <p className="text-text-muted dark:text-gray-400 mb-6 max-w-2xl mx-auto">Fale com a gente hoje mesmo e descubra como podemos impulsionar seus resultados.</p>
             <Button 
               onClick={() => scrollToSection("contato")}
               className="px-8 py-4 rounded-xl bg-primary-red text-white font-medium shadow-lg hover:bg-primary-red-dark focus:outline-none focus:ring-2 focus:ring-primary-red focus:ring-offset-2 transition-all text-lg"
@@ -421,12 +424,12 @@ const Index = () => {
       </AnimatedSection>
 
       {/* Carousel Section */}
-      <AnimatedSection id="portfolio" className="py-20 bg-gray-50">
+      <AnimatedSection id="portfolio" className="py-20 bg-gray-50 dark:bg-gray-900">
         <Suspense fallback={<LoadingFallback />}>
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-poppins">Nosso Portfólio</h2>
-              <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
                 Explore nossos trabalhos mais impactantes e resultados reais.
               </p>
             </div>
@@ -445,7 +448,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
-            <div className="mt-4 inline-flex items-center gap-3 bg-secondary-yellow/10 text-text-main text-lg font-semibold px-6 py-3 rounded-full border border-secondary-yellow/30 shadow-sm">
+            <div className="mt-4 inline-flex items-center gap-3 bg-secondary-yellow/10 dark:bg-secondary-yellow/20 text-text-main dark:text-white text-lg font-semibold px-6 py-3 rounded-full border border-secondary-yellow/30 dark:border-secondary-yellow/40 shadow-sm">
               <Clock className="text-secondary-yellow" size={24} />
               <p>Entre em contato e receba uma proposta exclusiva em até 24h.</p>
             </div>
@@ -464,7 +467,7 @@ const Index = () => {
                   <div><Label htmlFor="message">Mensagem</Label><Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Ex.: Quero aumentar minhas vendas com tráfego pago." /></div>
                   <Button type="submit" className="w-full bg-primary-red hover:bg-primary-red-dark rounded-xl text-lg py-3 font-bold">Quero Receber Proposta</Button>
                 </form>
-                <div className="mt-6 space-y-2 text-sm text-text-muted">
+                <div className="mt-6 space-y-2 text-sm text-text-muted dark:text-gray-400">
                   <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Resposta em até 24h</p>
                   <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Atendimento personalizado</p>
                   <p className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Mais de 500 clientes satisfeitos</p>
@@ -482,21 +485,21 @@ const Index = () => {
                   <div className="bg-secondary-yellow rounded-full p-3"><Phone className="text-white" size={20} /></div>
                   <div>
                     <p className="font-bold">Telefone</p>
-                    <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}</a>
+                    <a href={`tel:+${settings?.contact_phone?.replace(/\D/g, '')}`} className="text-text-muted dark:text-gray-400 hover:text-primary-red">{loading ? 'Carregando...' : formatPhoneNumberForDisplay(settings?.contact_phone || '')}</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="bg-secondary-yellow rounded-full p-3"><Mail className="text-white" size={20} /></div>
                   <div>
                     <p className="font-bold">E-mail</p>
-                    <a href="mailto:opperstoreofc@gmail.com" className="text-text-muted hover:text-primary-red">opperstoreofc@gmail.com</a>
+                    <a href="mailto:opperstoreofc@gmail.com" className="text-text-muted dark:text-gray-400 hover:text-primary-red">opperstoreofc@gmail.com</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="bg-secondary-yellow rounded-full p-3"><Instagram className="text-white" size={20} /></div>
                   <div>
                     <p className="font-bold">Instagram</p>
-                    <a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir Instagram ${settings?.instagram}`} className="text-text-muted hover:text-primary-red">{loading ? 'Carregando...' : settings?.instagram}</a>
+                    <a href={settings?.instagram_url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir Instagram ${settings?.instagram}`} className="text-text-muted dark:text-gray-400 hover:text-primary-red">{loading ? 'Carregando...' : settings?.instagram}</a>
                   </div>
                 </div>
               </CardContent>
