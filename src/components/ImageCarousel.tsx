@@ -55,7 +55,7 @@ const ImageCarousel = ({ items }: ImageCarouselProps) => {
           slidesPerView={"auto"}
           coverflowEffect={{
             rotate: 0,
-            stretch: 80,
+            stretch: 60,
             depth: 200,
             modifier: 1,
             slideShadows: false,

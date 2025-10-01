@@ -90,9 +90,16 @@
 
 /* Slide styling */
 .swiper-coverflow .swiper-slide {
-  width: 300px;
+  width: 280px;
   height: 400px;
   transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .swiper-coverflow .swiper-slide {
+    width: 320px;
+    height: 420px;
+  }
 }
 
 /* Active slide is larger and centered */

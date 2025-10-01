@@ -266,7 +266,7 @@ const Index = () => {
     <div className="min-h-screen bg-background-light font-inter">
       {/* Navbar */}
       <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 z-50 transition-all duration-300 ${hasScrolled ? 'shadow-md' : ''}`}>
-        <div className="container mx-auto px-6 h-24 flex justify-between items-center">
+        <div className="container mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
           <div 
             className="text-3xl font-poppins font-bold cursor-pointer"
             onClick={() => scrollToSection("home")}
@@ -326,14 +326,14 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-40 pb-20 bg-white">
+      <section id="home" className="pt-28 md:pt-40 pb-20 bg-white">
         <motion.div 
           className="container mx-auto px-6 text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl leading-tight font-poppins">
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl leading-tight font-poppins">
             Transformamos marcas em <span className="text-primary-red">experiências memoráveis</span>
           </motion.h1>
           <motion.p variants={itemVariants} className="mt-4 text-lg text-text-muted max-w-3xl mx-auto">
@@ -360,7 +360,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
-              <h2 className="text-4xl font-poppins mb-6">O fator "X" da OpperX</h2>
+              <h2 className="text-3xl md:text-4xl font-poppins mb-6">O fator "X" da OpperX</h2>
               <p className="text-text-muted mb-4">A OpperX nasceu com a missão de transformar ideias em resultados reais. Mesmo sendo uma agência jovem, carregamos a energia da inovação e a experiência de profissionais apaixonados por marketing digital.</p>
               <p className="text-text-muted mb-4">Nosso diferencial está no "X": o fator extra que entregamos em cada projeto — criatividade, estratégia e performance. Trabalhamos lado a lado com nossos clientes para construir marcas fortes, gerar impacto e criar conexões autênticas com o público.</p>
               <p className="text-text-muted">Na OpperX, cada cliente é mais que um projeto. É uma parceria. 🚀</p>
@@ -378,7 +378,7 @@ const Index = () => {
       <AnimatedSection id="servicos" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Transformamos ideias em <span className="text-primary-red">resultados digitais</span> 🚀</h2>
+            <h2 className="text-3xl md:text-4xl font-poppins">Transformamos ideias em <span className="text-primary-red">resultados digitais</span> 🚀</h2>
             <p className="text-lg text-text-muted mt-4 max-w-3xl mx-auto">
               Mais de 500 projetos entregues com sucesso. Oferecemos estratégias personalizadas para impulsionar seu negócio ao próximo nível.
             </p>
@@ -425,7 +425,7 @@ const Index = () => {
         <Suspense fallback={<LoadingFallback />}>
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-poppins">Nosso Portfólio</h2>
+              <h2 className="text-3xl md:text-4xl font-poppins">Nosso Portfólio</h2>
               <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
                 Explore nossos trabalhos mais impactantes e resultados reais.
               </p>
@@ -444,7 +444,7 @@ const Index = () => {
       <AnimatedSection id="contato" className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
+            <h2 className="text-3xl md:text-4xl font-poppins">Vamos Transformar seu Negócio</h2>
             <div className="mt-4 inline-flex items-center gap-3 bg-secondary-yellow/10 text-text-main text-lg font-semibold px-6 py-3 rounded-full border border-secondary-yellow/30 shadow-sm">
               <Clock className="text-secondary-yellow" size={24} />
               <p>Entre em contato e receba uma proposta exclusiva em até 24h.</p>

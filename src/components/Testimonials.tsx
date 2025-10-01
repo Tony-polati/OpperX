@@ -51,7 +51,7 @@ const Testimonials = () => {
     <section id="depoimentos" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-poppins">
+          <h2 className="text-3xl md:text-4xl font-poppins">
             Clientes que confiaram na OpperX e tiveram{" "}
             <span className="text-primary-red">resultados reais</span> 🚀
           </h2>
