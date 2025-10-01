@@ -8,7 +8,7 @@ const ChatbotWidget = () => {
     // SNIPPET DO CRISP CHAT
     // --------------------------------------------------------------------
     (window as any).$crisp = [];
-    (window as any).CRISP_WEBSITE_ID = "33f3d6c4-9bcc-446a-b0f6-bb2e64f2b94e";
+    (window as any).CRISP_WEBSITE_ID = "eca88cc6-b1c8-4efc-b6f7-98be47adb885";
     
     (() => {
       const d = document;
